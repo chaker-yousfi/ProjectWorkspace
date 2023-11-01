@@ -1,20 +1,19 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
-import 'package:ecommerce_app/views/login_view.dart';
+import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer' as developer;
 
-class SignUpView extends StatefulWidget {
-  const SignUpView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
 
   @override
-  State<SignUpView> createState() => _SignUpViewState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 bool isObscureText = true;
 
-class _SignUpViewState extends State<SignUpView> {
+class _LoginViewState extends State<LoginView> {
   void validation() {
     final FormState? _form = _formKey.currentState;
     if (_form!.validate()) {
@@ -31,17 +30,17 @@ class _SignUpViewState extends State<SignUpView> {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child:  SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Container(
                   height: 250,
                   width: double.infinity,
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        "Register",
+                        "Login",
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
@@ -50,11 +49,11 @@ class _SignUpViewState extends State<SignUpView> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 10,
                 ),
                 Container(
-                  height: 400,
+                  height: 200,
                   margin: const EdgeInsets.symmetric(
                     horizontal: 10,
                   ),
@@ -65,56 +64,42 @@ class _SignUpViewState extends State<SignUpView> {
                       TextFormField(
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please enter your username";
-                          } else if (value.length < 6) {
-                            return "Username is too short";
-                          }
-                          return "";
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Username",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
                             return "Please enter your email";
                           } else if (!emailRegex.hasMatch(value)) {
-                            return "Invalid email";
+                            return ("Invalid email");
                           }
-                          return "";
+                          return ("");
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
                           hintText: "Email",
                           hintStyle: TextStyle(
                             color: Colors.black,
                           ),
-                          border: OutlineInputBorder(),
                         ),
                       ),
                       TextFormField(
                         obscureText: isObscureText,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return "Please enter your password";
+                            return ("Enter your password");
                           } else if (value.length < 8) {
-                            return "Password is too short. Enter at least 8 characters";
+                            return ("Your password is too short");
                           }
-                          return "";
+                          return ("");
                         },
                         decoration: InputDecoration(
+                          border: OutlineInputBorder(),
                           hintText: "Password",
+                          hintStyle: TextStyle(
+                            color: Colors.black,
+                          ),
                           suffixIcon: GestureDetector(
                             onTap: () {
-                              developer.log(isObscureText.toString());
+                              FocusScope.of(context).unfocus();
                               setState(() {
                                 isObscureText = !isObscureText;
                               });
-                              FocusScope.of(context).unfocus();
                             },
                             child: Icon(
                               isObscureText == true
@@ -123,66 +108,44 @@ class _SignUpViewState extends State<SignUpView> {
                               color: Colors.black,
                             ),
                           ),
-                          hintStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: const OutlineInputBorder(),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your phone number";
-                          } else if (value.length < 10) {
-                            return "Phone number must be 10 digits";
-                          }
-                          return "";
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Phone Number",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: OutlineInputBorder(),
                         ),
                       ),
                       Container(
                         height: 45,
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {
-                            validation();
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey),
-                          child: const Text("Register"),
-                        ),
+                            onPressed: () {
+                              validation();
+                            },
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey),
+                            child: Text("Login")),
                       ),
                       Row(
                         children: <Widget>[
-                          const Text("I already have an account"),
-                          const SizedBox(
-                            width: 10,
+                          Text("I do not have an account"),
+                          SizedBox(
+                            width: 20,
+                            
                           ),
                           GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               Navigator.of(context).pushReplacement(
                                 MaterialPageRoute(
-                                  builder: (ctx) => LoginView(),
+                                  builder: (ctx) => SignUpView(),
                                 ),
                               );
                             },
-                            child: const Text(
-                              "Login",
+                            child: Text(
+                              "Sign up",
                               style: TextStyle(
-                                color: Colors.cyan,
                                 fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                color: Colors.cyan,
                               ),
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
