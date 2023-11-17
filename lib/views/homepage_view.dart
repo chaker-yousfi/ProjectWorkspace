@@ -45,12 +45,11 @@ class HomePageView extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 10),
+        margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: <Widget>[
             Container(
-              height: 200,
-              color: Colors.blue,
+              height: 120,
               width: double.infinity,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -76,6 +75,38 @@ class HomePageView extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Card(
+                      child: Container(
+                        height: 250,
+                        width: 180,
+                        color: Colors.blue,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              height: 170,
+                              width: 160,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                      "images/men_sportwear_img_1.jpeg"),
+                                ),
+
+                                // image:DecorationImage(image: ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
