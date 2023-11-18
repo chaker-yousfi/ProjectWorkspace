@@ -3,6 +3,43 @@ import 'package:flutter/material.dart';
 class HomePageView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   // const HomePageView({super.key});
+  Widget _buildFeaturedProduct({String? name, double? price, String? image}) {
+    return Card(
+      child: Container(
+        height: 250,
+        width: 180,
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 190,
+              width: 160,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("images/$image"),
+                ),
+
+                // image:DecorationImage(image: ),
+              ),
+            ),
+            Text(
+              "$price DZD",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+                color: Color(0xff9b96d6),
+              ),
+            ),
+            Text(
+              ("$name"),
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,26 +89,43 @@ class HomePageView extends StatelessWidget {
               height: 120,
               width: double.infinity,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Featured Products",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: "Search",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      Text(
-                        "See All",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Container(
+                    height: 50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Featured Products",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "See All",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -81,33 +135,44 @@ class HomePageView extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Card(
-                      child: Container(
-                        height: 250,
-                        width: 180,
-                        color: Colors.blue,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                              height: 170,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      "images/men_sportwear_img_1.jpeg"),
-                                ),
-
-                                // image:DecorationImage(image: ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    Row(
+                      children: <Widget>[
+                        _buildFeaturedProduct(
+                            name: "Sportwear",
+                            price: 4000,
+                            image: "men_sportwear_img_1.jpeg"),
+                        _buildFeaturedProduct(
+                            name: "Sportwear",
+                            price: 4000,
+                            image: "men_sportwear_img_1.jpeg"),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
+            Container(
+              height: 70,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Categories",
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "Categories",
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
