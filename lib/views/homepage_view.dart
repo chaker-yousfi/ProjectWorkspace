@@ -23,7 +23,7 @@ class HomePageView extends StatelessWidget {
             ),
             Text(
               "$price DZD",
-              style: TextStyle(
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 17,
                 color: Color(0xff9b96d6),
@@ -31,7 +31,7 @@ class HomePageView extends StatelessWidget {
             ),
             Text(
               ("$name"),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 17,
               ),
             ),
@@ -41,13 +41,83 @@ class HomePageView extends StatelessWidget {
     );
   }
 
+  Widget _buildProductCategory({required String? image, required colorCode}) {
+    return CircleAvatar(
+      maxRadius: 45,
+      backgroundColor: Color(colorCode),
+      child: Container(
+        height: 40,
+        child: Image(
+          color: Colors.white,
+          image: AssetImage("images/$image"),
+        ),
+      ),
+      // backgroundImage: AssetImage("images/$image"),
+    );
+  }
+
+  Widget _buildProductSection() {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 50,
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Featured Products",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "See All",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    _buildFeaturedProduct(
+                        name: "Sportwear",
+                        price: 4000,
+                        image: "men_sportwear_img_1.jpeg"),
+                    _buildFeaturedProduct(
+                        name: "Sportwear",
+                        price: 4000,
+                        image: "men_sportwear_img_1.jpeg"),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: Drawer(),
+      drawer: const Drawer(),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Home Page",
           style: TextStyle(
             color: Colors.black,
@@ -57,7 +127,7 @@ class HomePageView extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.grey[100],
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.menu,
             color: Colors.black,
           ),
@@ -68,10 +138,10 @@ class HomePageView extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications_none, color: Colors.black),
+            icon: const Icon(Icons.notifications_none, color: Colors.black),
           ),
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.send,
               color: Colors.black,
             ),
@@ -82,97 +152,217 @@ class HomePageView extends StatelessWidget {
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 120,
-              width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search),
-                      hintText: "Search",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        child: ListView(
+          children: [
+            Column(
+              children: <Widget>[
+                Container(
+                  height: 120,
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.search),
+                          hintText: "Search",
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        height: 50,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Featured Products",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "See All",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    height: 50,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Featured Products",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "See All",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                          children: <Widget>[
+                            _buildFeaturedProduct(
+                                name: "Sportwear",
+                                price: 4000,
+                                image: "men_sportwear_img_1.jpeg"),
+                            _buildFeaturedProduct(
+                                name: "Sportwear",
+                                price: 4000,
+                                image: "men_sportwear_img_1.jpeg"),
                           ],
                         ),
                       ],
                     ),
+                  ],
+                ),
+                Container(
+                  height: 70,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Categories",
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "Categories",
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            Row(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
+                ),
+                Container(
+                  height: 60,
+                  child: Row(
+                    children: <Widget>[
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 50,
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Featured Products",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "See All",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        _buildFeaturedProduct(
-                            name: "Sportwear",
-                            price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
-                        _buildFeaturedProduct(
-                            name: "Sportwear",
-                            price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                        Row(
+                          children: <Widget>[
+                            _buildFeaturedProduct(
+                                name: "Sportwear",
+                                price: 4000,
+                                image: "men_sportwear_img_1.jpeg"),
+                            _buildFeaturedProduct(
+                                name: "Sportwear",
+                                price: 4000,
+                                image: "men_sportwear_img_1.jpeg"),
+                          ],
+                        ),
                       ],
                     ),
                   ],
                 ),
+                Container(
+                  height: 70,
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Categories",
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "Categories",
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 60,
+                  child: Row(
+                    children: <Widget>[
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                      _buildProductCategory(
+                        image: "sport.png",
+                        colorCode: 0xff33dcfd,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-            Container(
-              height: 70,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "Categories",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),
