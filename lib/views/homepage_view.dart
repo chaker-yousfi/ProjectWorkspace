@@ -1,11 +1,7 @@
-<<<<<<< HEAD
 import 'package:ecommerce_app/views/details_view.dart';
-import 'package:ecommerce_app/views/list_product_view.dart';
-import 'package:ecommerce_app/widgets/single_product_widget.dart';
-=======
+
 import '/views/list_product_view.dart';
 import '/widgets/single_product_widget.dart';
->>>>>>> 7d79f13581817dcfd9f8add9d4e3f754464f7cfb
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 
