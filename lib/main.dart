@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/views/details_view.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
@@ -20,6 +21,6 @@ class MyApp extends StatelessWidget {
           // scaffoldBackgroundColor: Colors.white,
           // visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home:  HomePageView());
+        home:  DetailsView());
   }
 }
