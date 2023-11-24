@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/views/details_view.dart';
 import 'package:ecommerce_app/views/list_product_view.dart';
 import 'package:ecommerce_app/widgets/single_product_widget.dart';
 import 'package:flutter/material.dart';
@@ -226,14 +227,34 @@ class HomePageView extends StatelessWidget {
                         ),
                         Row(
                           children: <Widget>[
-                            SingleProductWidget(
-                                name: "Sportwear",
-                                price: 4000,
-                                image: "men_sportwear_img_1.jpeg"),
-                            SingleProductWidget(
-                                name: "Sportwear",
-                                price: 4000,
-                                image: "men_sportwear_img_1.jpeg"),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (ctx) => DetailsView(
+                                            image: "men_sportwear_img_1.jpeg",
+                                            name: "Sportwear",
+                                            price: 4000)));
+                              },
+                              child: SingleProductWidget(
+                                  name: "Sportwear",
+                                  price: 4000,
+                                  image: "men_sportwear_img_1.jpeg"),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (ctx) => DetailsView(
+                                            image: "men_sportwear_img_1.jpeg",
+                                            name: "Sportwear",
+                                            price: 4000)));
+                              },
+                              child: SingleProductWidget(
+                                  name: "Sportwear",
+                                  price: 4000,
+                                  image: "men_sportwear_img_1.jpeg"),
+                            ),
                           ],
                         ),
                       ],
@@ -284,14 +305,33 @@ class HomePageView extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            SingleProductWidget(
-                                name: "Sportwear",
-                                price: 4000,
-                                image: "men_sportwear_img_1.jpeg"),
-                            SingleProductWidget(
-                                name: "Sportwear",
-                                price: 4000,
-                                image: "men_sportwear_img_1.jpeg"),
+                            GestureDetector(onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (ctx) => DetailsView(
+                                            image: "men_sportwear_img_1.jpeg",
+                                            name: "Sportwear",
+                                            price: 4000)));
+                              },
+                              child: SingleProductWidget(
+                                  name: "Sportwear",
+                                  price: 4000,
+                                  image: "men_sportwear_img_1.jpeg"),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (ctx) => DetailsView(
+                                            image: "men_sportwear_img_1.jpeg",
+                                            name: "Sportwear",
+                                            price: 4000)));
+                              },
+                              child: SingleProductWidget(
+                                  name: "Sportwear",
+                                  price: 4000,
+                                  image: "men_sportwear_img_1.jpeg"),
+                            ),
                           ],
                         ),
                       ],

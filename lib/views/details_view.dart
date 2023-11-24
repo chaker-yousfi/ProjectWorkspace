@@ -1,6 +1,12 @@
+import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:flutter/material.dart';
 
 class DetailsView extends StatefulWidget {
+  final String name;
+  final String image;
+  final double price;
+  // ignore: use_key_in_widget_constructors
+  DetailsView({required this.image, required this.name, required this.price});
   @override
   State<DetailsView> createState() => _DetailsViewState();
 }
@@ -39,6 +45,8 @@ class _DetailsViewState extends State<DetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: Text("Detail Page",style: TextStyle(color: Colors.black),),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
@@ -47,7 +55,13 @@ class _DetailsViewState extends State<DetailsView> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (ctx) => HomePageView(),
+              ),
+            );
+          },
         ),
         actions: <Widget>[
           IconButton(
@@ -75,7 +89,7 @@ class _DetailsViewState extends State<DetailsView> {
                           decoration: BoxDecoration(
                               image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: AssetImage('images/men_sportwear_img_1.jpeg'),
+                            image: AssetImage("images/${widget.image}"),
                           )),
                         ),
                       ),
@@ -96,9 +110,9 @@ class _DetailsViewState extends State<DetailsView> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text("Men SportWear", style: myStyle),
+                            Text(widget.name, style: myStyle),
                             Text(
-                              " 4000 DZD",
+                              widget.price.toString() + "DZD",
                               style: TextStyle(
                                 color: Color(0xff9b96d6),
                                 fontSize: 18,
@@ -206,16 +220,20 @@ class _DetailsViewState extends State<DetailsView> {
                           ),
                         ]),
                   ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Container(
                     height: 60,
                     width: double.infinity,
-                    child:ElevatedButton(
-                            onPressed: () {
-                              
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.pink),
-                            child: Text("Check Out",style: myStyle,)),
+                    child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.pink),
+                        child: Text(
+                          "Check Out",
+                          style: myStyle,
+                        )),
                   )
                 ],
               ),

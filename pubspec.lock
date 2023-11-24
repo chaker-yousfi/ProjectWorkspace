@@ -155,7 +155,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -177,7 +176,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
-=======
   lecle_flutter_carousel_pro:
     dependency: "direct main"
     description:
@@ -186,7 +184,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.0.3"
->>>>>>> a1dc68fae3c6dcb24e0b6f011fa2e69f4a3770f6
   lints:
     dependency: transitive
     description:
@@ -313,10 +310,5 @@ packages:
     source: hosted
     version: "0.1.4-beta"
 sdks:
-<<<<<<< HEAD
-  dart: ">=3.1.5 <4.0.0"
-  flutter: ">=3.3.0"
-=======
   dart: ">=3.1.5 <3.10.0"
-  flutter: ">=1.17.0"
->>>>>>> a1dc68fae3c6dcb24e0b6f011fa2e69f4a3770f6
+  flutter: ">=3.3.0"
