@@ -7,7 +7,7 @@ class HomePageView extends StatelessWidget {
     return Card(
       child: Container(
         height: 250,
-        width: 180,
+        width: 160,
         child: Column(
           children: <Widget>[
             Container(
@@ -43,7 +43,7 @@ class HomePageView extends StatelessWidget {
 
   Widget _buildProductCategory({required String? image, required colorCode}) {
     return CircleAvatar(
-      maxRadius: 45,
+      maxRadius: 40,
       backgroundColor: Color(colorCode),
       child: Container(
         height: 40,
@@ -277,7 +277,7 @@ class HomePageView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Featured Products",
+                            "New Products",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -315,51 +315,6 @@ class HomePageView extends StatelessWidget {
                       ],
                     ),
                   ],
-                ),
-                Container(
-                  height: 70,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  child: Row(
-                    children: <Widget>[
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),
