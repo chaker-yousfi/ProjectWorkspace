@@ -20,6 +20,6 @@ class MyApp extends StatelessWidget {
           // scaffoldBackgroundColor: Colors.white,
           // visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home:  HomePageView());
+        home:  LoginView());
   }
 }
