@@ -1,6 +1,9 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
 import 'package:ecommerce_app/views/login_view.dart';
+import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
+import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
+import '../widgets/mybutton_widget.dart';
 import 'dart:developer' as developer;
 
 class SignUpView extends StatefulWidget {
@@ -24,6 +27,114 @@ class _SignUpViewState extends State<SignUpView> {
     }
   }
 
+  Widget _buildAllTextFormField() {
+    return Container(
+      height: 330,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          MyTextFormField(
+            name: "User Name",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your username";
+              } else if (value.length < 6) {
+                return "Username is too short";
+              }
+              return "";
+            },
+          ),
+          MyTextFormField(
+            name: "Email",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your email";
+              } else if (!emailRegex.hasMatch(value)) {
+                return "Invalid email";
+              }
+              return null;
+            },
+          ),
+          PasswordTextFormField(
+            obserText: isObscureText,
+            name: "Password",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter your password";
+              } else if (value.length < 8) {
+                return "Your password is too short";
+              }
+              return null;
+            },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                isObscureText = !isObscureText;
+              });
+            },
+          ),
+          MyTextFormField(
+            name: "Phone Number",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your phone number";
+              } else if (value.length < 10) {
+                return "Phone number must be 10 digits";
+              }
+              return "";
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomPart() {
+    return Container(
+      height: 400,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildAllTextFormField(),
+          MyButton(
+              name: "Sign Up",
+              onPressed: () {
+                validation();
+              }),
+          Row(
+            children: <Widget>[
+              const Text("I already have an account"),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (ctx) => LoginView(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Login",
+                  style: TextStyle(
+                    color: Colors.cyan,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +142,7 @@ class _SignUpViewState extends State<SignUpView> {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child:  SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
                 Container(
@@ -53,139 +164,7 @@ class _SignUpViewState extends State<SignUpView> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 400,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your username";
-                          } else if (value.length < 6) {
-                            return "Username is too short";
-                          }
-                          return "";
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Username",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your email";
-                          } else if (!emailRegex.hasMatch(value)) {
-                            return "Invalid email";
-                          }
-                          return "";
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Email",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      TextFormField(
-                        obscureText: isObscureText,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your password";
-                          } else if (value.length < 8) {
-                            return "Password is too short. Enter at least 8 characters";
-                          }
-                          return "";
-                        },
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              developer.log(isObscureText.toString());
-                              setState(() {
-                                isObscureText = !isObscureText;
-                              });
-                              FocusScope.of(context).unfocus();
-                            },
-                            child: Icon(
-                              isObscureText == true
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.black,
-                            ),
-                          ),
-                          hintStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: const OutlineInputBorder(),
-                        ),
-                      ),
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your phone number";
-                          } else if (value.length < 10) {
-                            return "Phone number must be 10 digits";
-                          }
-                          return "";
-                        },
-                        decoration: const InputDecoration(
-                          hintText: "Phone Number",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                      Container(
-                        height: 45,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            validation();
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey),
-                          child: const Text("Register"),
-                        ),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          const Text("I already have an account"),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GestureDetector(
-                            onTap: (){
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (ctx) => LoginView(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.cyan,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                _buildBottomPart(),
               ],
             ),
           ),

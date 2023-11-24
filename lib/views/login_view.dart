@@ -1,6 +1,10 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
+import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
+import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
+import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
+import '../widgets/mybutton_widget.dart';
 import 'dart:developer' as developer;
 
 class LoginView extends StatefulWidget {
@@ -11,6 +15,7 @@ class LoginView extends StatefulWidget {
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 bool isObscureText = true;
 
 class _LoginViewState extends State<LoginView> {
@@ -21,6 +26,92 @@ class _LoginViewState extends State<LoginView> {
     } else {
       developer.log("No");
     }
+  }
+
+  Widget _buildAllTextFormField() {
+    return Container(
+      height: 230,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          MyTextFormField(
+            name: "Email",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your email";
+              } else if (!emailRegex.hasMatch(value)) {
+                return "Invalid email";
+              }
+              return null;
+            },
+          ),
+          PasswordTextFormField(
+            obserText: isObscureText,
+            name: "Password",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter your password";
+              } else if (value.length < 8) {
+                return "Your password is too short";
+              }
+              return null;
+            },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                isObscureText = !isObscureText;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomPart() {
+    return Container(
+      height: 400,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildAllTextFormField(),
+          MyButton(
+              name: "Login",
+              onPressed: () {
+                validation();
+              }),
+          Row(
+            children: <Widget>[
+              const Text("I do not have an account"),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (ctx) => SignUpView(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Sign up",
+                  style: TextStyle(
+                    color: Colors.cyan,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 
   @override
@@ -36,7 +127,7 @@ class _LoginViewState extends State<LoginView> {
                 Container(
                   height: 250,
                   width: double.infinity,
-                  child: Column(
+                  child: const Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
@@ -49,106 +140,10 @@ class _LoginViewState extends State<LoginView> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 200,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your email";
-                          } else if (!emailRegex.hasMatch(value)) {
-                            return ("Invalid email");
-                          }
-                          return ("");
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Email",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      TextFormField(
-                        obscureText: isObscureText,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return ("Enter your password");
-                          } else if (value.length < 8) {
-                            return ("Your password is too short");
-                          }
-                          return ("");
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Password",
-                          hintStyle: TextStyle(
-                            color: Colors.black,
-                          ),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              FocusScope.of(context).unfocus();
-                              setState(() {
-                                isObscureText = !isObscureText;
-                              });
-                            },
-                            child: Icon(
-                              isObscureText == true
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 45,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              validation();
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey),
-                            child: Text("Login")),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Text("I do not have an account"),
-                          SizedBox(
-                            width: 20,
-                            
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (ctx) => SignUpView(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "Sign up",
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.cyan,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                _buildBottomPart(),
               ],
             ),
           ),
