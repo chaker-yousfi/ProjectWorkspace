@@ -1,9 +1,9 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
 import 'package:ecommerce_app/views/login_view.dart';
-import 'package:ecommerce_app/widgets/mytextformField.dart';
-import 'package:ecommerce_app/widgets/passwordtextformfield.dart';
+import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
+import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
-import '../widgets/mybutton.dart';
+import '../widgets/mybutton_widget.dart';
 import 'dart:developer' as developer;
 
 class SignUpView extends StatefulWidget {

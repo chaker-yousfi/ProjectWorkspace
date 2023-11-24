@@ -1,49 +1,15 @@
+import 'package:ecommerce_app/views/list_product_view.dart';
+import 'package:ecommerce_app/widgets/single_product_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 
 class HomePageView extends StatelessWidget {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
   // const HomePageView({super.key});
-  Widget _buildFeaturedProduct({String? name, double? price, String? image}) {
-    return Card(
-      child: Container(
-        height: 250,
-        width: 180,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 190,
-              width: 160,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/$image"),
-                ),
-
-                // image:DecorationImage(image: ),
-              ),
-            ),
-            Text(
-              "$price DZD",
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-                color: Color(0xff9b96d6),
-              ),
-            ),
-            Text(
-              ("$name"),
-              style: const TextStyle(
-                fontSize: 17,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   Widget _buildProductCategory({required String? image, required colorCode}) {
     return CircleAvatar(
-      maxRadius: 45,
+      maxRadius: 40,
       backgroundColor: Color(colorCode),
       child: Container(
         height: 40,
@@ -93,11 +59,11 @@ class HomePageView extends StatelessWidget {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    _buildFeaturedProduct(
+                    SingleProductWidget(
                         name: "Sportwear",
                         price: 4000,
                         image: "men_sportwear_img_1.jpeg"),
-                    _buildFeaturedProduct(
+                    SingleProductWidget(
                         name: "Sportwear",
                         price: 4000,
                         image: "men_sportwear_img_1.jpeg"),
@@ -137,15 +103,18 @@ class HomePageView extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_none, color: Colors.black),
-          ),
-          IconButton(
             icon: const Icon(
-              Icons.send,
+              Icons.search,
               color: Colors.black,
             ),
             onPressed: () {},
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.notifications_none,
+              color: Colors.black,
+            ),
           ),
         ],
       ),
@@ -157,63 +126,111 @@ class HomePageView extends StatelessWidget {
           children: [
             Column(
               children: <Widget>[
-                Container(
-                  height: 120,
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.search),
-                          hintText: "Search",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 50,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "Featured Products",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  "See All",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
+                Column(
+                  children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        Container(
+                          height: 240,
+                          child: Carousel(
+                            showIndicator: false,
+                            dotColor: Colors.white,
+                            autoplay: true,
+                            // dotBgColor: Colors.pinkAccent,
+                            // dotIncreaseSize: 10,
+                            // dotIncreasedColor: Colors.blue,
+                            dotSize: 20,
+                            images: [
+                              AssetImage('images/sport.png'),
+                              AssetImage('images/men_sportwear_img_1.jpeg'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 50,
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Categories",
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              // Text(
+                              //   "See All",
+                              //   style: TextStyle(
+                              //     fontSize: 17,
+                              //     fontWeight: FontWeight.bold,
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 60,
+                          child: Row(
+                            children: <Widget>[
+                              _buildProductCategory(
+                                image: "sport.png",
+                                colorCode: 0xff33dcfd,
+                              ),
+                              _buildProductCategory(
+                                image: "sport.png",
+                                colorCode: 0xff33dcfd,
+                              ),
+                              _buildProductCategory(
+                                image: "sport.png",
+                                colorCode: 0xff33dcfd,
+                              ),
+                              _buildProductCategory(
+                                image: "sport.png",
+                                colorCode: 0xff33dcfd,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Featured Products",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (contetx) => ListProductView(
+                                        name: "Featured Products"),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "See All",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         Row(
                           children: <Widget>[
-                            _buildFeaturedProduct(
+                            SingleProductWidget(
                                 name: "Sportwear",
                                 price: 4000,
                                 image: "men_sportwear_img_1.jpeg"),
-                            _buildFeaturedProduct(
+                            SingleProductWidget(
                                 name: "Sportwear",
                                 price: 4000,
                                 image: "men_sportwear_img_1.jpeg"),
@@ -224,70 +241,35 @@ class HomePageView extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  height: 70,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  child: Row(
-                    children: <Widget>[
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
                   height: 50,
-                  child: const Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Featured Products",
+                            "New Products",
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
-                            "See All",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ListProductView(name: "New Products"),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "See All",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
@@ -302,11 +284,11 @@ class HomePageView extends StatelessWidget {
                       children: <Widget>[
                         Row(
                           children: <Widget>[
-                            _buildFeaturedProduct(
+                            SingleProductWidget(
                                 name: "Sportwear",
                                 price: 4000,
                                 image: "men_sportwear_img_1.jpeg"),
-                            _buildFeaturedProduct(
+                            SingleProductWidget(
                                 name: "Sportwear",
                                 price: 4000,
                                 image: "men_sportwear_img_1.jpeg"),
@@ -315,51 +297,6 @@ class HomePageView extends StatelessWidget {
                       ],
                     ),
                   ],
-                ),
-                Container(
-                  height: 70,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 60,
-                  child: Row(
-                    children: <Widget>[
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                      _buildProductCategory(
-                        image: "sport.png",
-                        colorCode: 0xff33dcfd,
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),
