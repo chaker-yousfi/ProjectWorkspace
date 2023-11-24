@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 import 'package:ecommerce_app/views/details_view.dart';
 import 'package:ecommerce_app/views/list_product_view.dart';
 import 'package:ecommerce_app/widgets/single_product_widget.dart';
+=======
+import '/views/list_product_view.dart';
+import '/widgets/single_product_widget.dart';
+>>>>>>> 7d79f13581817dcfd9f8add9d4e3f754464f7cfb
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 
-class HomePageView extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-  // const HomePageView({super.key});
+class HomePageView extends StatefulWidget {
+  @override
+  State<HomePageView> createState() => _HomePageViewState();
+}
 
+class _HomePageViewState extends State<HomePageView> {
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+
+  // const HomePageView({super.key});
   Widget _buildProductCategory({required String? image, required colorCode}) {
     return CircleAvatar(
       maxRadius: 40,
@@ -22,6 +32,11 @@ class HomePageView extends StatelessWidget {
       // backgroundImage: AssetImage("images/$image"),
     );
   }
+
+  bool homeColor = true;
+  bool cartColor = false;
+  bool aboutUsColor = false;
+  bool contactUsColor = false;
 
   Widget _buildProductSection() {
     return Column(
@@ -82,7 +97,89 @@ class HomePageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text(
+                "loukmane",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              currentAccountPicture:
+                  CircleAvatar(backgroundImage: AssetImage('images/sport.png')),
+              decoration: BoxDecoration(
+                color: Color(0xfff2f2f2),
+              ),
+              accountEmail: Text(
+                "loukmane@email.com",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            ListTile(
+              selected: homeColor,
+              enabled: true,
+              onTap: () {
+                setState(() {
+                  homeColor = true;
+                  cartColor = false;
+                  aboutUsColor = false;
+                  contactUsColor = false;
+                });
+              },
+              leading: Icon(Icons.home),
+              title: Text("Home"),
+            ),
+            ListTile(
+              selected: cartColor,
+              onTap: () {
+                setState(() {
+                  homeColor = false;
+                  cartColor = true;
+                  aboutUsColor = false;
+                  contactUsColor = false;
+                });
+              },
+              leading: Icon(Icons.shopping_cart),
+              title: Text("Cart"),
+            ),
+            ListTile(
+              selected: aboutUsColor,
+              onTap: () {
+                setState(() {
+                  homeColor = false;
+                  cartColor = false;
+                  aboutUsColor = true;
+                  contactUsColor = false;
+                });
+              },
+              leading: Icon(Icons.info),
+              title: Text("About us"),
+            ),
+            ListTile(
+              selected: contactUsColor,
+              onTap: () {
+                setState(() {
+                  homeColor = false;
+                  cartColor = false;
+                  aboutUsColor = false;
+                  contactUsColor = true;
+                });
+              },
+              leading: Icon(Icons.mail),
+              title: Text("Contact us"),
+            ),
+            ListTile(
+              onTap: () {},
+              leading: Icon(Icons.exit_to_app),
+              title: Text("Logout"),
+            ),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: const Text(
           "Home Page",
