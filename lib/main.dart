@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/views/details_view.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/list_product_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
