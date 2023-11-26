@@ -1,5 +1,4 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
-import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';

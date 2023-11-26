@@ -33,6 +33,311 @@ class _HomePageViewState extends State<HomePageView> {
   bool cartColor = false;
   bool aboutUsColor = false;
   bool contactUsColor = false;
+  Widget _buildMyDrawer() {
+    return Drawer(
+      child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: Text(
+              "loukmane",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            currentAccountPicture:
+                CircleAvatar(backgroundImage: AssetImage('images/sport.png')),
+            decoration: BoxDecoration(
+              color: Color(0xfff2f2f2),
+            ),
+            accountEmail: Text(
+              "loukmane@email.com",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+          ListTile(
+            selected: homeColor,
+            enabled: true,
+            onTap: () {
+              setState(() {
+                homeColor = true;
+                cartColor = false;
+                aboutUsColor = false;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.home),
+            title: Text("Home"),
+          ),
+          ListTile(
+            selected: cartColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                cartColor = true;
+                aboutUsColor = false;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.shopping_cart),
+            title: Text("Cart"),
+          ),
+          ListTile(
+            selected: aboutUsColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                cartColor = false;
+                aboutUsColor = true;
+                contactUsColor = false;
+              });
+            },
+            leading: Icon(Icons.info),
+            title: Text("About us"),
+          ),
+          ListTile(
+            selected: contactUsColor,
+            onTap: () {
+              setState(() {
+                homeColor = false;
+                cartColor = false;
+                aboutUsColor = false;
+                contactUsColor = true;
+              });
+            },
+            leading: Icon(Icons.mail),
+            title: Text("Contact us"),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(Icons.exit_to_app),
+            title: Text("Logout"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImageSlider() {
+    return Container(
+      height: 240,
+      child: Carousel(
+        showIndicator: false,
+        dotColor: Colors.white,
+        autoplay: true,
+        // dotBgColor: Colors.pinkAccent,
+        // dotIncreaseSize: 10,
+        // dotIncreasedColor: Colors.blue,
+        dotSize: 20,
+        images: [
+          AssetImage('images/sport.png'),
+          AssetImage('images/men_sportwear_img_1.jpeg'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategory() {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 50,
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Categories",
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              // Text(
+              //   "See All",
+              //   style: TextStyle(
+              //     fontSize: 17,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
+            ],
+          ),
+        ),
+        Container(
+          height: 60,
+          child: Row(
+            children: <Widget>[
+              _buildProductCategory(
+                image: "sport.png",
+                colorCode: 0xff33dcfd,
+              ),
+              _buildProductCategory(
+                image: "sport.png",
+                colorCode: 0xff33dcfd,
+              ),
+              _buildProductCategory(
+                image: "sport.png",
+                colorCode: 0xff33dcfd,
+              ),
+              _buildProductCategory(
+                image: "sport.png",
+                colorCode: 0xff33dcfd,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFeature() {
+    return Column(
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "Featured Products",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (contetx) =>
+                        ListProductView(name: "Featured Products"),
+                  ),
+                );
+              },
+              child: Text(
+                "See All",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (ctx) => DetailsView(
+                        image: "men_sportwear_img_1.jpeg",
+                        name: "Sportwear",
+                        price: 4000)));
+              },
+              child: SingleProductWidget(
+                  name: "Sportwear",
+                  price: 4000,
+                  image: "men_sportwear_img_1.jpeg"),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (ctx) => DetailsView(
+                        image: "men_sportwear_img_1.jpeg",
+                        name: "Sportwear",
+                        price: 4000)));
+              },
+              child: SingleProductWidget(
+                  name: "Sportwear",
+                  price: 4000,
+                  image: "men_sportwear_img_1.jpeg"),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProducts() {
+    return Column(
+      children: <Widget>[
+        Container(
+          height: 50,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "New Products",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ListProductView(name: "New Products"),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "See All",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (ctx) => DetailsView(
+                                image: "men_sportwear_img_1.jpeg",
+                                name: "Sportwear",
+                                price: 4000)));
+                      },
+                      child: SingleProductWidget(
+                          name: "Sportwear",
+                          price: 4000,
+                          image: "men_sportwear_img_1.jpeg"),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (ctx) => DetailsView(
+                                image: "men_sportwear_img_1.jpeg",
+                                name: "Sportwear",
+                                price: 4000)));
+                      },
+                      child: SingleProductWidget(
+                          name: "Sportwear",
+                          price: 4000,
+                          image: "men_sportwear_img_1.jpeg"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   Widget _buildProductSection() {
     return Column(
@@ -93,89 +398,6 @@ class _HomePageViewState extends State<HomePageView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            UserAccountsDrawerHeader(
-              accountName: Text(
-                "loukmane",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-              currentAccountPicture:
-                  CircleAvatar(backgroundImage: AssetImage('images/sport.png')),
-              decoration: BoxDecoration(
-                color: Color(0xfff2f2f2),
-              ),
-              accountEmail: Text(
-                "loukmane@email.com",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            ListTile(
-              selected: homeColor,
-              enabled: true,
-              onTap: () {
-                setState(() {
-                  homeColor = true;
-                  cartColor = false;
-                  aboutUsColor = false;
-                  contactUsColor = false;
-                });
-              },
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-            ),
-            ListTile(
-              selected: cartColor,
-              onTap: () {
-                setState(() {
-                  homeColor = false;
-                  cartColor = true;
-                  aboutUsColor = false;
-                  contactUsColor = false;
-                });
-              },
-              leading: Icon(Icons.shopping_cart),
-              title: Text("Cart"),
-            ),
-            ListTile(
-              selected: aboutUsColor,
-              onTap: () {
-                setState(() {
-                  homeColor = false;
-                  cartColor = false;
-                  aboutUsColor = true;
-                  contactUsColor = false;
-                });
-              },
-              leading: Icon(Icons.info),
-              title: Text("About us"),
-            ),
-            ListTile(
-              selected: contactUsColor,
-              onTap: () {
-                setState(() {
-                  homeColor = false;
-                  cartColor = false;
-                  aboutUsColor = false;
-                  contactUsColor = true;
-                });
-              },
-              leading: Icon(Icons.mail),
-              title: Text("Contact us"),
-            ),
-            ListTile(
-              onTap: () {},
-              leading: Icon(Icons.exit_to_app),
-              title: Text("Logout"),
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
         title: const Text(
           "Home Page",
@@ -219,218 +441,15 @@ class _HomePageViewState extends State<HomePageView> {
         child: ListView(
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          height: 240,
-                          child: Carousel(
-                            showIndicator: false,
-                            dotColor: Colors.white,
-                            autoplay: true,
-                            // dotBgColor: Colors.pinkAccent,
-                            // dotIncreaseSize: 10,
-                            // dotIncreasedColor: Colors.blue,
-                            dotSize: 20,
-                            images: [
-                              AssetImage('images/sport.png'),
-                              AssetImage('images/men_sportwear_img_1.jpeg'),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 50,
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Categories",
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              // Text(
-                              //   "See All",
-                              //   style: TextStyle(
-                              //     fontSize: 17,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 60,
-                          child: Row(
-                            children: <Widget>[
-                              _buildProductCategory(
-                                image: "sport.png",
-                                colorCode: 0xff33dcfd,
-                              ),
-                              _buildProductCategory(
-                                image: "sport.png",
-                                colorCode: 0xff33dcfd,
-                              ),
-                              _buildProductCategory(
-                                image: "sport.png",
-                                colorCode: 0xff33dcfd,
-                              ),
-                              _buildProductCategory(
-                                image: "sport.png",
-                                colorCode: 0xff33dcfd,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Featured Products",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (contetx) => ListProductView(
-                                        name: "Featured Products"),
-                                  ),
-                                );
-                              },
-                              child: Text(
-                                "See All",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (ctx) => DetailsView(
-                                            image: "men_sportwear_img_1.jpeg",
-                                            name: "Sportwear",
-                                            price: 4000)));
-                              },
-                              child: SingleProductWidget(
-                                  name: "Sportwear",
-                                  price: 4000,
-                                  image: "men_sportwear_img_1.jpeg"),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (ctx) => DetailsView(
-                                            image: "men_sportwear_img_1.jpeg",
-                                            name: "Sportwear",
-                                            price: 4000)));
-                              },
-                              child: SingleProductWidget(
-                                  name: "Sportwear",
-                                  price: 4000,
-                                  image: "men_sportwear_img_1.jpeg"),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                _buildImageSlider(),
+                _buildCategory(),
+                SizedBox(
+                  height: 20,
                 ),
-                Container(
-                  height: 50,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "New Products",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      ListProductView(name: "New Products"),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "See All",
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            GestureDetector(onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (ctx) => DetailsView(
-                                            image: "men_sportwear_img_1.jpeg",
-                                            name: "Sportwear",
-                                            price: 4000)));
-                              },
-                              child: SingleProductWidget(
-                                  name: "Sportwear",
-                                  price: 4000,
-                                  image: "men_sportwear_img_1.jpeg"),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (ctx) => DetailsView(
-                                            image: "men_sportwear_img_1.jpeg",
-                                            name: "Sportwear",
-                                            price: 4000)));
-                              },
-                              child: SingleProductWidget(
-                                  name: "Sportwear",
-                                  price: 4000,
-                                  image: "men_sportwear_img_1.jpeg"),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                _buildFeature(),
+                _buildProducts(),
               ],
             ),
           ],

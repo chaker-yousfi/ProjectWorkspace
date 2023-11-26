@@ -1,8 +1,5 @@
-import 'package:ecommerce_app/views/details_view.dart';
+import 'package:ecommerce_app/views/cart_view.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
-import 'package:ecommerce_app/views/list_product_view.dart';
-import 'package:ecommerce_app/views/login_view.dart';
-import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
