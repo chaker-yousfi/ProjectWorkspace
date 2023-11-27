@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../views/checkout.dart';
 
 class CartView extends StatefulWidget {
   final double price;
@@ -99,7 +100,14 @@ class _CartViewState extends State<CartView> {
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.deepPurple,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (ctx) => CheckOut(
+                      name: widget.name,
+                      price: widget.price,
+                      image: widget.image,
+                    )));
+          },
           child: Text(
             "Continuous",
             style: TextStyle(fontSize: 18, color: Colors.white),
