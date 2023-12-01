@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 
 class HomePageView extends StatefulWidget {
+  static const String  pageRoute = "/homepageview";
   @override
   State<HomePageView> createState() => _HomePageViewState();
 }
@@ -22,7 +23,7 @@ class _HomePageViewState extends State<HomePageView> {
         height: 40,
         child: Image(
           color: Colors.white,
-          image: AssetImage("images/$image"),
+          image: AssetImage("assets/images/$image"),
         ),
       ),
       // backgroundImage: AssetImage("images/$image"),
@@ -45,7 +46,7 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ),
             currentAccountPicture:
-                CircleAvatar(backgroundImage: AssetImage('images/sport.png')),
+                CircleAvatar(backgroundImage: AssetImage('assets/images/sport.png')),
             decoration: BoxDecoration(
               color: Color(0xfff2f2f2),
             ),
@@ -131,8 +132,8 @@ class _HomePageViewState extends State<HomePageView> {
         // dotIncreasedColor: Colors.blue,
         dotSize: 20,
         images: [
-          AssetImage('images/sport.png'),
-          AssetImage('images/men_sportwear_img_1.jpeg'),
+          AssetImage('assets/images/sport.png'),
+          AssetImage('assets/images/men_sportwear_img_1.jpeg'),
         ],
       ),
     );

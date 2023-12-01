@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
+import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
@@ -91,7 +92,7 @@ class _SignUpViewState extends State<SignUpView> {
 
   Widget _buildBottomPart() {
     return Container(
-      height: 400,
+      height: 500,
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
@@ -100,36 +101,43 @@ class _SignUpViewState extends State<SignUpView> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildAllTextFormField(),
-          MyButton(
-              name: "Sign Up",
-              onPressed: () {
-                validation();
-              }),
-          Row(
-            children: <Widget>[
-              const Text("I already have an account"),
-              const SizedBox(
-                width: 10,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (ctx) => LoginView(),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, top: 20),
+            child: Row(
+              children: <Widget>[
+                const Text("Already have an account?"),
+                const SizedBox(
+                  width: 10,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (ctx) => LoginView(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.cyan,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                  );
-                },
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                    color: Colors.cyan,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
-          )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          MyButton(
+              name: "Create Account",
+              onPressed: () {
+                validation();
+                Navigator.pushNamed(context, HomePageView.pageRoute);
+              }),
         ],
       ),
     );
@@ -140,32 +148,36 @@ class _SignUpViewState extends State<SignUpView> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 250,
-                  width: double.infinity,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Register",
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    height: 180,
+                    width: double.infinity,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          "Sign up",
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buildBottomPart(),
-              ],
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _buildBottomPart(),
+                ],
+              ),
             ),
           ),
         ),

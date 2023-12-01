@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
+import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
@@ -78,14 +79,9 @@ class _LoginViewState extends State<LoginView> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildAllTextFormField(),
-          MyButton(
-              name: "Login",
-              onPressed: () {
-                validation();
-              }),
           Row(
             children: <Widget>[
-              const Text("I do not have an account"),
+              const Text("Don't have an account?"),
               const SizedBox(
                 width: 10,
               ),
@@ -107,7 +103,16 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
             ],
-          )
+          ),
+          SizedBox(
+            height: 70,
+          ),
+          MyButton(
+              name: "Login",
+              onPressed: () {
+                validation();
+                Navigator.pushNamed(context, HomePageView.pageRoute);
+              }),
         ],
       ),
     );
@@ -124,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
             child: Column(
               children: <Widget>[
                 Container(
-                  height: 250,
+                  height: 180,
                   width: double.infinity,
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.end,

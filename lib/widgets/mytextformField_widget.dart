@@ -15,6 +15,7 @@ class MyTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         hintText: name,
+        hintStyle: const TextStyle(color: Colors.black)
       ),
     );
   }
