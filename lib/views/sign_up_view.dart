@@ -4,6 +4,7 @@ import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../widgets/mybutton_widget.dart';
 import 'dart:developer' as developer;
 
@@ -159,15 +160,16 @@ class _SignUpViewState extends State<SignUpView> {
                   Container(
                     height: 180,
                     width: double.infinity,
-                    child: const Column(
+                    child:  Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text(
                           "Sign up",
-                          style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: GoogleFonts.plusJakartaSans(
+                              fontSize: 40,
+                              color: const Color(0xFF1B1A1A),
+                              fontWeight: FontWeight.w700,
+                            ),
                         ),
                       ],
                     ),

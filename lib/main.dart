@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           // scaffoldBackgroundColor: Colors.white,
           // visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-      home: HomePageView(),
+      home: LoginView(),
       routes: {
         HomePageView.pageRoute: (ctx) => HomePageView(),
       },

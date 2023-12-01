@@ -13,10 +13,9 @@ class MyTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: name,
-        hintStyle: const TextStyle(color: Colors.black)
-      ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
+          hintText: name,
+          hintStyle: const TextStyle(color: Colors.black)),
     );
   }
 }
