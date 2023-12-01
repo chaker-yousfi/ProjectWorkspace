@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/commons/images.dart';
 import 'package:ecommerce_app/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
@@ -23,7 +24,7 @@ class _HomePageViewState extends State<HomePageView> {
         height: 40,
         child: Image(
           color: Colors.white,
-          image: AssetImage("assets/images/$image"),
+          image: AssetImage(image!),
         ),
       ),
       // backgroundImage: AssetImage("images/$image"),
@@ -141,13 +142,8 @@ class _HomePageViewState extends State<HomePageView> {
         // dotIncreasedColor: Colors.blue,
         dotSize: 20,
         images: [
-<<<<<<< HEAD
-          AssetImage('images/black friday.jpeg'),
-          AssetImage('images/Discount Banner.jpeg'),
-=======
-          AssetImage('assets/images/sport.png'),
-          AssetImage('assets/images/men_sportwear_img_1.jpeg'),
->>>>>>> ada0957b66b13916394f4f1db1286723de024419
+          AssetImage(homepageImage_1),
+          AssetImage(homepageImage_2),
         ],
       ),
     ),
@@ -186,19 +182,19 @@ class _HomePageViewState extends State<HomePageView> {
           child: Row(
             children: <Widget>[
               _buildProductCategory(
-                image: "Weight.png",
+                image: categoryImage_1,
                 colorCode: 0xff33dcfd,
               ),
               _buildProductCategory(
-                image: "Tshirt.png",
+                image: categoryImage_2,
                 colorCode: 0xff33dcfd,
               ),
               _buildProductCategory(
-                image: "Shoe.png",
+                image: categoryImage_3,
                 colorCode: 0xff33dcfd,
               ),
               _buildProductCategory(
-                image: "Drawstring.png",
+                image: categoryImage_4,
                 colorCode: 0xff33dcfd,
               ),
             ],
@@ -252,28 +248,28 @@ class _HomePageViewState extends State<HomePageView> {
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (ctx) => DetailsView(
-                        image: "Nike.jpeg",
+                        image: productImage_1,
                         name: "Sneakers",
                         price: 4000)));
               },
               child: SingleProductWidget(
                   name: "Sneakers",
                   price: 4000,
-                  image: "Nike.jpeg"),
+                  image: productImage_1),
             ),
         ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (ctx) => DetailsView(
-                        image: "CompressionShirt.jpeg",
-                        name: "Compression Shirt",
+                        image: productImage_2,
+                        name: "Dumbbells Weights",
                         price: 3000)));
               },
               child: SingleProductWidget(
-                  name: "Compression Shirt",
+                  name: "Dumbbells Weights",
                   price: 3000,
-                  image: "CompressionShirt.jpeg"),
+                  image:productImage_2),
             ),
           ],
         ),
@@ -334,27 +330,27 @@ class _HomePageViewState extends State<HomePageView> {
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
-                                image: "Nike Sneakers_fr.jpeg",
+                                image: productImage_3,
                                 name: "Sneakers",
                                 price: 5000)));
                       },
                       child: SingleProductWidget(
                           name: "Sneakers",
                           price: 5000,
-                          image: "Nike Sneakers_fr.jpeg"),
+                          image: productImage_3),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
-                                image: "Dumbbells_Weights.jpeg",
-                                name: "Dumbbells Weights",
+                                image: productImage_4,
+                                name: "Compression Shirt",
                                 price: 2000)));
                       },
                       child: SingleProductWidget(
-                          name: "Dumbbells Weights",
+                          name: "Compression Shirt",
                           price: 2000,
-                          image: "Dumbbells_Weights.jpeg"),
+                          image: productImage_4),
                     ),
                   ],
                 ),
@@ -366,60 +362,7 @@ class _HomePageViewState extends State<HomePageView> {
     );
   }
 
-  Widget _buildProductSection() {
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 50,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Featured Products",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "See All",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    SingleProductWidget(
-                        name: "Sportwear",
-                        price: 4000,
-                        image: "men_sportwear_img_1.jpeg"),
-                    SingleProductWidget(
-                        name: "Sportwear",
-                        price: 4000,
-                        image: "men_sportwear_img_1.jpeg"),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/commons/images.dart';
 import 'package:ecommerce_app/views/WelcomeToSign.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class WelcomeView extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.contain,
-                          image: AssetImage("images/first.jpg"),
+                          image: AssetImage(welcomeImage),
                         ),
                       ),
                     ),

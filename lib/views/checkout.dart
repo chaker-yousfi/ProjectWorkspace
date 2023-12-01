@@ -28,7 +28,7 @@ class _CheckOutState extends State<CheckOut> {
                   borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
                         fit: BoxFit.fill,
-                        image: AssetImage("images/${widget.image}"))),
+                        image: AssetImage(widget.image))),
               ),
               Container(
                 height: 140,

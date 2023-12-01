@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/commons/images.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +27,7 @@ class WelcomeToSign extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.contain,
-                          image: AssetImage("images/second.jpg"),
+                          image: AssetImage(welcomeImage2),
                         ),
                       ),
                     ),
