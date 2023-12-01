@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CheckOut extends StatefulWidget {
   final double price;
@@ -24,6 +25,7 @@ class _CheckOutState extends State<CheckOut> {
                 height: 130,
                 width: 150,
                 decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
                         fit: BoxFit.fill,
                         image: AssetImage("images/${widget.image}"))),
@@ -36,21 +38,40 @@ class _CheckOutState extends State<CheckOut> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.name),
-                      Text("Clothing"),
+                      Text(widget.name,
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,),),
+                      Text("Cloths",
+                      style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+
+                      ),),
                       Text(
                         "${widget.price} DZD",
-                        style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.plusJakartaSans(
+                          color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+
+                      ),
                       ),
                       Container(
                         height: 35,
                         width: 120,
-                        color: Colors.grey,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(10)),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Text("Quantity"),
+                              Text("Quantity",
+                              style: GoogleFonts.plusJakartaSans(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+
+                      ),),
                               Text("1"),
                             ]),
                       ),
@@ -72,10 +93,18 @@ class _CheckOutState extends State<CheckOut> {
       children: <Widget>[
         Text(
           startName,
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         Text(
           endName,
-        )
+          style: GoogleFonts.plusJakartaSans(
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ],
     );
   }
@@ -86,8 +115,13 @@ class _CheckOutState extends State<CheckOut> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "CheckOut Page",
-          style: TextStyle(color: Colors.black),
+          "Checkout",
+          style: GoogleFonts.plusJakartaSans(
+            color: Color(0xFF1B1A1A),
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.07,
+          )
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -116,12 +150,19 @@ class _CheckOutState extends State<CheckOut> {
         padding: EdgeInsets.only(bottom: 10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: Color(0xFF1B1A1A),
+            shape:  RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(15),
+          ),
           ),
           onPressed: () {},
           child: Text(
             "Buy",
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            style: GoogleFonts.plusJakartaSans(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            )
           ),
         ),
       ),
@@ -149,7 +190,7 @@ class _CheckOutState extends State<CheckOut> {
                     children: <Widget>[
                       _buildBottomDetail(
                         startName: "Your Price",
-                        endName: "1200 DZD",
+                        endName: "20000 DZD",
                       ),
                       _buildBottomDetail(
                         startName: "Discount",
@@ -161,7 +202,7 @@ class _CheckOutState extends State<CheckOut> {
                       ),
                       _buildBottomDetail(
                         startName: "Total",
-                        endName: "1200 DZD",
+                        endName: "20000 DZD",
                       ),
                     ],
                   ),
