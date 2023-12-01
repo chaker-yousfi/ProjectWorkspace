@@ -6,6 +6,7 @@ import '/views/list_product_view.dart';
 import '/widgets/single_product_widget.dart';
 
 class HomePageView extends StatefulWidget {
+  static const String  pageRoute = "/homepageview";
   @override
   State<HomePageView> createState() => _HomePageViewState();
 }
@@ -22,7 +23,7 @@ class _HomePageViewState extends State<HomePageView> {
         height: 40,
         child: Image(
           color: Colors.white,
-          image: AssetImage("images/$image"),
+          image: AssetImage("assets/images/$image"),
         ),
       ),
       // backgroundImage: AssetImage("images/$image"),
@@ -45,7 +46,7 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ),
             currentAccountPicture:
-                CircleAvatar(backgroundImage: AssetImage('images/sport.png')),
+                CircleAvatar(backgroundImage: AssetImage('assets/images/sport.png')),
             decoration: BoxDecoration(
               color: Color(0xfff2f2f2),
             ),
@@ -140,8 +141,13 @@ class _HomePageViewState extends State<HomePageView> {
         // dotIncreasedColor: Colors.blue,
         dotSize: 20,
         images: [
+<<<<<<< HEAD
           AssetImage('images/black friday.jpeg'),
           AssetImage('images/Discount Banner.jpeg'),
+=======
+          AssetImage('assets/images/sport.png'),
+          AssetImage('assets/images/men_sportwear_img_1.jpeg'),
+>>>>>>> ada0957b66b13916394f4f1db1286723de024419
         ],
       ),
     ),

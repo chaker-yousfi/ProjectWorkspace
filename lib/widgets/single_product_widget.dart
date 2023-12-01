@@ -33,7 +33,7 @@ class SingleProductWidget extends StatelessWidget {
                       20), // Rounded border for the inner Container holding the image
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage("images/$image"),
+                    image: AssetImage("assets/images/$image"),
                   ),
                 ),
               ),

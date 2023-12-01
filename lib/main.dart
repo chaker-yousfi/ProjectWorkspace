@@ -1,4 +1,7 @@
-import 'package:ecommerce_app/views/WelcomeView.dart';
+import 'package:ecommerce_app/views/cart_view.dart';
+import 'package:ecommerce_app/views/login_view.dart';
+import 'package:ecommerce_app/views/sign_up_view.dart';
+import 'package:ecommerce_app/views/welcome_view.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< HEAD
         title: 'Flutter Demo',
         theme: ThemeData(
             // primaryColor: Color(0xff746bc9),
@@ -20,5 +24,18 @@ class MyApp extends StatelessWidget {
             // visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
         home: HomePageView());
+=======
+      title: 'Flutter Demo',
+      theme: ThemeData(
+          // primaryColor: Color(0xff746bc9),
+          // scaffoldBackgroundColor: Colors.white,
+          // visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
+      home: LoginView(),
+      routes: {
+        HomePageView.pageRoute: (ctx) => HomePageView(),
+      },
+    );
+>>>>>>> ada0957b66b13916394f4f1db1286723de024419
   }
 }
