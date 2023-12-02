@@ -1,119 +1,89 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
-import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
+import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../widgets/mybutton_widget.dart';
-import 'dart:developer' as developer;
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
-
   @override
   State<LoginView> createState() => _LoginViewState();
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+String p =
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-bool isObscureText = true;
+RegExp regExp = new RegExp(p);
+
+void validation() {
+  final FormState? _form = _formKey.currentState;
+  if (_form!.validate()) {
+    print("Yes");
+  } else {
+    print("No");
+  }
+}
+
+bool obserText = true;
 
 class _LoginViewState extends State<LoginView> {
-  void validation() {
-    final FormState? _form = _formKey.currentState;
-    if (_form!.validate()) {
-      developer.log("Yes");
-    } else {
-      developer.log("No");
-    }
-  }
-
-  Widget _buildAllTextFormField() {
+  Widget _buildAllPart() {
     return Container(
-      height: 230,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          MyTextFormField(
-            name: "Email",
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Please enter your email";
-              } else if (!emailRegex.hasMatch(value)) {
-                return "Invalid email";
-              }
-              return null;
-            },
-          ),
-          PasswordTextFormField(
-            obserText: isObscureText,
-            name: "Password",
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Enter your password";
-              } else if (value.length < 8) {
-                return "Your password is too short";
-              }
-              return null;
-            },
-            onTap: () {
-              FocusScope.of(context).unfocus();
-              setState(() {
-                isObscureText = !isObscureText;
-              });
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomPart() {
-    return Container(
-      height: 400,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
+      height: 300,
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildAllTextFormField(),
-          Row(
-            children: <Widget>[
-              const Text("Don't have an account?"),
-              const SizedBox(
-                width: 10,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (ctx) => SignUpView(),
-                    ),
-                  );
-                },
-                child: const Text(
-                  "Sign up",
-                  style: TextStyle(
-                    color: Colors.cyan,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
+          Text(
+            "Login",
+            style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
-            height: 70,
+          MyTextFormField(
+            name: "Email",
+            validator: (value) {
+              if (value == "") {
+                return "Please enter your email";
+              } else if (!emailRegex.hasMatch(value)) {
+                return "Invalid email";
+              }
+              return "";
+            },
+          ),
+          PasswordTextFormField(
+            obserText: obserText,
+            name: "Password",
+            validator: (value) {
+              if (value == "") {
+                return "Enter your password";
+              } else if (value.length < 8) {
+                return "Your password is too short";
+              }
+              return "";
+            },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                obserText = !obserText;
+              });
+            },
           ),
           MyButton(
               name: "Login",
               onPressed: () {
                 validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
+          ChangeScreen(
+              name: "SignUp",
+              whichAccount: "I don't have an account",
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (ctx) => SignUpView(),
+                  ),
+                );
+              })
         ],
       ),
     );
@@ -122,36 +92,13 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 180,
-                  width: double.infinity,
-                  child:  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Login",
-                        style: GoogleFonts.plusJakartaSans(
-                            fontSize: 40,
-                            color: const Color(0xFF1B1A1A),
-                            fontWeight: FontWeight.w700,
-                          )
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buildBottomPart(),
-              ],
-            ),
+      body: Form(
+        key: _formKey,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[_buildAllPart()],
           ),
         ),
       ),
