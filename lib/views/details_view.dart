@@ -1,6 +1,10 @@
+import 'package:ecommerce_app/commons/colors.dart';
+import 'package:ecommerce_app/commons/images.dart';
 import 'package:ecommerce_app/views/cart_view.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
+import 'package:ecommerce_app/widgets/mybutton_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailsView extends StatefulWidget {
   final String name;
@@ -18,13 +22,12 @@ class _DetailsViewState extends State<DetailsView> {
     return Container(
       height: 60,
       width: 60,
-      color: Color(0xfff2f2f2),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(70), color: Color(0xfff2f2f2)),
       child: Center(
         child: Text(
           name,
-          style: TextStyle(
-            fontSize: 17,
-          ),
+          style: TextStyle(fontSize: 19, fontWeight: FontWeight.w400),
         ),
       ),
     );
@@ -32,9 +35,10 @@ class _DetailsViewState extends State<DetailsView> {
 
   Widget _buildColorProduct({required Color color}) {
     return Container(
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(70), color: color),
       height: 60,
       width: 60,
-      color: color,
     );
   }
 
@@ -45,17 +49,20 @@ class _DetailsViewState extends State<DetailsView> {
   Widget _buildImage() {
     return Center(
       child: Container(
-        width: 300,
+        width: 380,
+        height: 290,
         child: Card(
           child: Container(
-            padding: EdgeInsets.all(15),
+            margin: EdgeInsets.all(0),
             child: Container(
               height: 200,
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage("images/${widget.image}"),
-              )),
+                borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(widget.image),
+                ),
+              ),
             ),
           ),
         ),
@@ -65,22 +72,31 @@ class _DetailsViewState extends State<DetailsView> {
 
   Widget _buildNameToDescriptionPart() {
     return Container(
-      height: 80,
+      height: 100,
       child: Row(
         children: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.name, style: myStyle),
-              Text(
-                widget.price.toString() + "DZD",
-                style: TextStyle(
-                  color: Color(0xff9b96d6),
-                  fontSize: 18,
-                ),
+              Row(
+                children: [
+                  Text(widget.name,
+                      style: GoogleFonts.plusJakartaSans(
+                          fontSize: 20, fontWeight: FontWeight.w800)),
+                  SizedBox(width: 160),
+                  Text(
+                    widget.price.toString() + "DZD",
+                    style: TextStyle(
+                        color: Color(0xff9b96d6),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w800),
+                  ),
+                ],
               ),
-              Text("Description", style: myStyle),
+              Text("Description",
+                  style: GoogleFonts.plusJakartaSans(
+                      fontSize: 20, fontWeight: FontWeight.w800)),
             ],
           ),
         ],
@@ -90,13 +106,13 @@ class _DetailsViewState extends State<DetailsView> {
 
   Widget _buildDescription() {
     return Container(
-      height: 190,
+      height: 250,
       child: Wrap(
         children: <Widget>[
           Text(
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            style: TextStyle(
-              fontSize: 14,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 13,
             ),
           )
         ],
@@ -108,7 +124,8 @@ class _DetailsViewState extends State<DetailsView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text("Size", style: myStyle),
+        Text("Size",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
         SizedBox(
           height: 15,
         ),
@@ -117,11 +134,11 @@ class _DetailsViewState extends State<DetailsView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              _buildSizeProduct(name: "S"),
-              _buildSizeProduct(name: "M"),
-              _buildSizeProduct(name: "L"),
-              _buildSizeProduct(name: "XL"),
-              _buildSizeProduct(name: "XXL")
+              _buildSizeProduct(name: "40"),
+              _buildSizeProduct(name: "40.5"),
+              _buildSizeProduct(name: "41"),
+              _buildSizeProduct(name: "42"),
+              _buildSizeProduct(name: "44")
             ],
           ),
         ),
@@ -138,9 +155,7 @@ class _DetailsViewState extends State<DetailsView> {
         ),
         Text(
           "Color",
-          style: TextStyle(
-            fontSize: 18,
-          ),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
         ),
         SizedBox(
           height: 15,
@@ -163,77 +178,81 @@ class _DetailsViewState extends State<DetailsView> {
   }
 
   Widget _buildQuantityPart() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-          height: 15,
-        ),
-        Text("Quantity", style: myStyle),
-        SizedBox(
-          height: 15,
-        ),
-        Container(
-          height: 40,
-          width: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.cyan,
-          ),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  child: Icon(Icons.remove),
-                  onTap: () {
-                    setState(() {
-                      if (count > 1) {
-                        count--;
-                      }
-                    });
-                  },
-                ),
-                Text(
-                  count.toString(),
-                  style: myStyle,
-                ),
-                GestureDetector(
-                  child: Icon(Icons.add),
-                  onTap: () {
-                    setState(() {
-                      count++;
-                    });
-                  },
-                ),
-              ]),
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 15,
+            ),
+            Text("Quantity",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 40,
+              width: 100,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Color(0xff9b96d6)),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: Icon(Icons.remove),
+                      onTap: () {
+                        setState(() {
+                          if (count > 1) {
+                            count--;
+                          }
+                        });
+                      },
+                    ),
+                    Text(
+                      count.toString(),
+                      style: myStyle,
+                    ),
+                    GestureDetector(
+                      child: Icon(Icons.add),
+                      onTap: () {
+                        setState(() {
+                          count++;
+                        });
+                      },
+                    ),
+                  ]),
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _buildButtonPart() {
-    return Container(
-      height: 60,
-      width: double.infinity,
-      child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (ctx) => CartView(
-                  image: widget.image,
-                  name: widget.name,
-                  price: widget.price,
-                ),
-              ),
-            );
-          },
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.pink),
-          child: Text(
-            "Check Out",
-            style: myStyle,
-          )),
-    );
-  }
+  // Widget _buildButtonPart() {
+  //   return Container(
+  //     height: 60,
+  //     width: double.infinity,
+  //     child: ElevatedButton(
+  //         onPressed: () {
+  //           Navigator.of(context).pushReplacement(
+  //             MaterialPageRoute(
+  //               builder: (ctx) => CartView(
+  //                 image: widget.image,
+  //                 name: widget.name,
+  //                 price: widget.price,
+  //               ),
+  //             ),
+  //           );
+  //         },
+  //         style: ElevatedButton.styleFrom(backgroundColor: buttonColor),
+  //         child: Text(
+  //           "Check Out",
+  //           style: TextStyle(color: Colors.white, fontSize: 18),
+  //         )),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -241,8 +260,9 @@ class _DetailsViewState extends State<DetailsView> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Detail Page",
-          style: TextStyle(color: Colors.black),
+          widget.name,
+          style: GoogleFonts.plusJakartaSans(
+              color: Colors.black, fontWeight: FontWeight.w600),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -290,7 +310,20 @@ class _DetailsViewState extends State<DetailsView> {
                   SizedBox(
                     height: 15,
                   ),
-                  _buildButtonPart(),
+                  MyButton(
+                    name: "Checkout",
+                    onPressed: () {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (ctx) => CartView(
+                            image: widget.image,
+                            name: widget.name,
+                            price: widget.price,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

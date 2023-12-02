@@ -1,5 +1,8 @@
+import 'package:ecommerce_app/commons/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../views/checkout.dart';
+import 'package:ecommerce_app/commons/images.dart';
 
 class CartView extends StatefulWidget {
   final double price;
@@ -27,9 +30,9 @@ class _CartViewState extends State<CartView> {
                 height: 130,
                 width: 150,
                 decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage("images/${widget.image}"))),
+                        fit: BoxFit.fill, image: AssetImage(widget.image))),
               ),
               Container(
                 height: 140,
@@ -43,13 +46,15 @@ class _CartViewState extends State<CartView> {
                       Text("Clothing"),
                       Text(
                         "${widget.price.toString()} DZD",
-                        style: TextStyle(
+                        style: GoogleFonts.plusJakartaSans(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                       ),
                       Container(
                         height: 35,
                         width: 120,
-                        color: Colors.grey,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.grey),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
@@ -65,7 +70,8 @@ class _CartViewState extends State<CartView> {
                               ),
                               Text(
                                 count.toString(),
-                                style: TextStyle(fontSize: 18),
+                                style:
+                                    GoogleFonts.plusJakartaSans(fontSize: 18),
                               ),
                               GestureDetector(
                                 child: Icon(Icons.add),
@@ -98,7 +104,10 @@ class _CartViewState extends State<CartView> {
         padding: EdgeInsets.only(bottom: 10),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: buttonColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
           ),
           onPressed: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -109,16 +118,17 @@ class _CartViewState extends State<CartView> {
                     )));
           },
           child: Text(
-            "Continuous",
-            style: TextStyle(fontSize: 18, color: Colors.white),
+            "Continue",
+            style:
+                GoogleFonts.plusJakartaSans(fontSize: 18, color: Colors.white),
           ),
         ),
       ),
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Cart Page",
-          style: TextStyle(color: Colors.black),
+          "Your Cart",
+          style: GoogleFonts.plusJakartaSans(color: Colors.black),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,

@@ -1,7 +1,8 @@
+import 'package:ecommerce_app/commons/images.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
-
 import '/widgets/single_product_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ListProductView extends StatelessWidget {
   final String name;
@@ -61,9 +62,9 @@ class ListProductView extends StatelessWidget {
                         children: [
                           Text(
                             name,
-                            style: TextStyle(
+                            style: GoogleFonts.plusJakartaSans(
                               fontSize: 18,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ],
@@ -82,29 +83,29 @@ class ListProductView extends StatelessWidget {
                       childAspectRatio: 0.7,
                       children: <Widget>[
                         SingleProductWidget(
-                            name: "Sportwear",
+                            name: "Nike Sneakers",
                             price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                            image: productImage_1),
                         SingleProductWidget(
-                            name: "Sportwear",
-                            price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                            name: "Dumbbells Weights",
+                            price: 3000,
+                            image: productImage_2),
                         SingleProductWidget(
-                            name: "Sportwear",
-                            price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                            name: "Nike Sneakers",
+                            price: 5000,
+                            image: productImage_3),
                         SingleProductWidget(
-                            name: "Sportwear",
-                            price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                            name: "Compression Shirt",
+                            price: 2500,
+                            image: productImage_4),
                         SingleProductWidget(
-                            name: "Sportwear",
+                            name: "Nike Sneakers",
                             price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                            image: productImage_1),
                         SingleProductWidget(
-                            name: "Sportwear",
+                            name: "Nike Sneakers",
                             price: 4000,
-                            image: "men_sportwear_img_1.jpeg"),
+                            image: productImage_1),
                       ],
                     ))
               ],
