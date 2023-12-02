@@ -1,9 +1,10 @@
+import 'package:ecommerce_app/commons/images.dart';
 import 'package:ecommerce_app/views/details_view.dart';
-
-import '/views/list_product_view.dart';
-import '/widgets/single_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '/views/list_product_view.dart';
+import '/widgets/single_product_widget.dart';
 
 class HomePageView extends StatefulWidget {
   static const String  pageRoute = "/homepageview";
@@ -23,7 +24,7 @@ class _HomePageViewState extends State<HomePageView> {
         height: 40,
         child: Image(
           color: Colors.white,
-          image: AssetImage("assets/images/$image"),
+          image: AssetImage(image!),
         ),
       ),
       // backgroundImage: AssetImage("images/$image"),
@@ -121,8 +122,17 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
   Widget _buildImageSlider() {
-    return Container(
-      height: 240,
+  return Container(
+    height: 200,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(24), // Adjust the value to change the roundness
+      border: Border.all(
+        color: Colors.transparent, // Border color
+        width: 1, // Border width
+      ),
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(24), // Match the same roundness as the outer container
       child: Carousel(
         showIndicator: false,
         dotColor: Colors.white,
@@ -132,27 +142,30 @@ class _HomePageViewState extends State<HomePageView> {
         // dotIncreasedColor: Colors.blue,
         dotSize: 20,
         images: [
-          AssetImage('assets/images/sport.png'),
-          AssetImage('assets/images/men_sportwear_img_1.jpeg'),
+          AssetImage(homepageImage_1),
+          AssetImage(homepageImage_2),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   Widget _buildCategory() {
     return Column(
       children: <Widget>[
         Container(
           height: 50,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Categories",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: GoogleFonts.plusJakartaSans(
+                  fontSize: 20,
+                  color: Color(0xFF1B1A1A),
+                  fontWeight: FontWeight.w700,
+                )
               ),
               // Text(
               //   "See All",
@@ -169,19 +182,19 @@ class _HomePageViewState extends State<HomePageView> {
           child: Row(
             children: <Widget>[
               _buildProductCategory(
-                image: "sport.png",
+                image: categoryImage_1,
                 colorCode: 0xff33dcfd,
               ),
               _buildProductCategory(
-                image: "sport.png",
+                image: categoryImage_2,
                 colorCode: 0xff33dcfd,
               ),
               _buildProductCategory(
-                image: "sport.png",
+                image: categoryImage_3,
                 colorCode: 0xff33dcfd,
               ),
               _buildProductCategory(
-                image: "sport.png",
+                image: categoryImage_4,
                 colorCode: 0xff33dcfd,
               ),
             ],
@@ -199,10 +212,11 @@ class _HomePageViewState extends State<HomePageView> {
           children: [
             Text(
               "Featured Products",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: GoogleFonts.plusJakartaSans(
+                color: Color(0xFF1B1A1A),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+            ),
             ),
             GestureDetector(
               onTap: () {
@@ -214,42 +228,48 @@ class _HomePageViewState extends State<HomePageView> {
                 );
               },
               child: Text(
-                "See All",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                "SEE ALL",
+                style:  GoogleFonts.plusJakartaSans(
+                color: Color(0xff9b96d6),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+            ),
               ),
             ),
           ],
         ),
         Row(
           children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (ctx) => DetailsView(
-                        image: "men_sportwear_img_1.jpeg",
-                        name: "Sportwear",
-                        price: 4000)));
-              },
-              child: SingleProductWidget(
-                  name: "Sportwear",
-                  price: 4000,
-                  image: "men_sportwear_img_1.jpeg"),
+          Container(
+            decoration:BoxDecoration(borderRadius:BorderRadius.circular(30),
             ),
+            child:GestureDetector(
+              
+              onTap: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (ctx) => DetailsView(
+                        image: productImage_1,
+                        name: "Sneakers",
+                        price: 4000)));
+              },
+              child: SingleProductWidget(
+                  name: "Sneakers",
+                  price: 4000,
+                  image: productImage_1),
+            ),
+        ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (ctx) => DetailsView(
-                        image: "men_sportwear_img_1.jpeg",
-                        name: "Sportwear",
-                        price: 4000)));
+                        image: productImage_2,
+                        name: "Dumbbells Weights",
+                        price: 3000)));
               },
               child: SingleProductWidget(
-                  name: "Sportwear",
-                  price: 4000,
-                  image: "men_sportwear_img_1.jpeg"),
+                  name: "Dumbbells Weights",
+                  price: 3000,
+                  image:productImage_2),
             ),
           ],
         ),
@@ -270,10 +290,11 @@ class _HomePageViewState extends State<HomePageView> {
                 children: [
                   Text(
                     "New Products",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style:  GoogleFonts.plusJakartaSans(
+                color: Color(0xFF1B1A1A),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+            ),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -285,11 +306,12 @@ class _HomePageViewState extends State<HomePageView> {
                       );
                     },
                     child: Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      "SEE ALL",
+                      style:  GoogleFonts.plusJakartaSans(
+                        color: Color(0xff9b96d6),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+            ),
                     ),
                   ),
                 ],
@@ -308,27 +330,27 @@ class _HomePageViewState extends State<HomePageView> {
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
-                                image: "men_sportwear_img_1.jpeg",
-                                name: "Sportwear",
-                                price: 4000)));
+                                image: productImage_3,
+                                name: "Sneakers",
+                                price: 5000)));
                       },
                       child: SingleProductWidget(
-                          name: "Sportwear",
-                          price: 4000,
-                          image: "men_sportwear_img_1.jpeg"),
+                          name: "Sneakers",
+                          price: 5000,
+                          image: productImage_3),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
-                                image: "men_sportwear_img_1.jpeg",
-                                name: "Sportwear",
-                                price: 4000)));
+                                image: productImage_4,
+                                name: "Compression Shirt",
+                                price: 2000)));
                       },
                       child: SingleProductWidget(
-                          name: "Sportwear",
-                          price: 4000,
-                          image: "men_sportwear_img_1.jpeg"),
+                          name: "Compression Shirt",
+                          price: 2000,
+                          image: productImage_4),
                     ),
                   ],
                 ),
@@ -340,72 +362,14 @@ class _HomePageViewState extends State<HomePageView> {
     );
   }
 
-  Widget _buildProductSection() {
-    return Column(
-      children: <Widget>[
-        Container(
-          height: 50,
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Featured Products",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "See All",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    SingleProductWidget(
-                        name: "Sportwear",
-                        price: 4000,
-                        image: "men_sportwear_img_1.jpeg"),
-                    SingleProductWidget(
-                        name: "Sportwear",
-                        price: 4000,
-                        image: "men_sportwear_img_1.jpeg"),
-                  ],
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
       appBar: AppBar(
-        title: const Text(
-          "Home Page",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
+       
         centerTitle: true,
         elevation: 0.0,
         backgroundColor: Colors.grey[100],

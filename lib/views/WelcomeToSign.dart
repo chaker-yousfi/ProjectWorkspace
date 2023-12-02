@@ -1,10 +1,10 @@
 import 'package:ecommerce_app/commons/images.dart';
-import 'package:ecommerce_app/views/WelcomeToSign.dart';
-import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WelcomeView extends StatelessWidget {
+
+class WelcomeToSign extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +27,7 @@ class WelcomeView extends StatelessWidget {
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           fit: BoxFit.contain,
-                          image: AssetImage(welcomeImage),
+                          image: AssetImage(welcomeImage2),
                         ),
                       ),
                     ),
@@ -41,14 +41,16 @@ class WelcomeView extends StatelessWidget {
 
             children:<Widget>[
             Container(
-                      width: 270,
+                      width: 240,
                       child:Text(
-                      "Algeria’s No 1 Ecommerce App",
+                      "Ready to start shopping Sign up to get started",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.plusJakartaSans(
-                  fontSize: 20,
-                  color: Color(0xFF1B1A1A),
-                  fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                            color: Color(0xFF1B1A1A),
+                            fontWeight: FontWeight.w700,
+                          
+                            
                       ),
                     ),
                     ),]
@@ -64,12 +66,11 @@ class WelcomeView extends StatelessWidget {
                       width: 350,
                       child: ElevatedButton(
                         child: Text(
-                          "Get Started",
+                          "Sign Up",
                           style: GoogleFonts.plusJakartaSans(
                             fontSize: 20,
                             color: Color(0xffffffff),
                             fontWeight: FontWeight.w600,
-                          
                           ),
                         ),
                         style: ElevatedButton.styleFrom(
@@ -80,7 +81,7 @@ class WelcomeView extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: (ctx) => WelcomeToSign()));
+                                  builder: (ctx) => SignUpView()));
                         },
                       ),
                     ),
