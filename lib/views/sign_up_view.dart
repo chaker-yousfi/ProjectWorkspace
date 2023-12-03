@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
+import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
@@ -105,6 +106,7 @@ class _SignUpViewState extends State<SignUpView> {
           MyButton(
               name: "Sign Up",
               onPressed: () {
+                Navigator.pushNamed(context, HomePageView.pageRoute);
                 validation();
               }),
           ChangeScreen(
