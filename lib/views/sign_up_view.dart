@@ -162,16 +162,16 @@ class _SignUpViewState extends State<SignUpView> {
                   Container(
                     height: 180,
                     width: double.infinity,
-                    child:  Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text(
                           "Sign up",
                           style: GoogleFonts.plusJakartaSans(
-                              fontSize: 40,
-                              color: const Color(0xFF1B1A1A),
-                              fontWeight: FontWeight.w700,
-                            ),
+                            fontSize: 40,
+                            color: const Color(0xFF1B1A1A),
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ],
                     ),

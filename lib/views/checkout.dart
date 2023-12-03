@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/views/cart_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ecommerce_app/commons/images.dart';
 
 class CheckOut extends StatefulWidget {
   final double price;
@@ -25,10 +27,9 @@ class _CheckOutState extends State<CheckOut> {
                 height: 130,
                 width: 150,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(20),
                     image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage(widget.image))),
+                        fit: BoxFit.fill, image: AssetImage(widget.image))),
               ),
               Container(
                 height: 140,
@@ -38,40 +39,44 @@ class _CheckOutState extends State<CheckOut> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.name,
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,),),
-                      Text("Cloths",
-                      style: GoogleFonts.plusJakartaSans(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-
-                      ),),
+                      Text(
+                        widget.name,
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        "Cloths",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
                       Text(
                         "${widget.price} DZD",
                         style: GoogleFonts.plusJakartaSans(
                           color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-
-                      ),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Container(
                         height: 35,
                         width: 120,
                         decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(10)),
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(10)),
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              Text("Quantity",
-                              style: GoogleFonts.plusJakartaSans(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-
-                      ),),
+                              Text(
+                                "Quantity",
+                                style: GoogleFonts.plusJakartaSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               Text("1"),
                             ]),
                       ),
@@ -114,15 +119,13 @@ class _CheckOutState extends State<CheckOut> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          "Checkout",
-          style: GoogleFonts.plusJakartaSans(
-            color: Color(0xFF1B1A1A),
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.07,
-          )
-        ),
+        title: Text("Checkout",
+            style: GoogleFonts.plusJakartaSans(
+              color: Color(0xFF1B1A1A),
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.07,
+            )),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
@@ -131,7 +134,16 @@ class _CheckOutState extends State<CheckOut> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (ctx) => CartView(
+                    image: widget.image,
+                    name: widget.name,
+                    price: widget.price),
+              ),
+            );
+          },
         ),
         actions: <Widget>[
           IconButton(
@@ -151,19 +163,17 @@ class _CheckOutState extends State<CheckOut> {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: Color(0xFF1B1A1A),
-            shape:  RoundedRectangleBorder(
-                   borderRadius: BorderRadius.circular(15),
-          ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
           ),
           onPressed: () {},
-          child: Text(
-            "Buy",
-            style: GoogleFonts.plusJakartaSans(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            )
-          ),
+          child: Text("Buy",
+              style: GoogleFonts.plusJakartaSans(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+              )),
         ),
       ),
       body: Container(
@@ -174,15 +184,14 @@ class _CheckOutState extends State<CheckOut> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: <Widget>[
-                   _buildSingleCartProduct(),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
                     _buildSingleCartProduct(),
                     _buildSingleCartProduct(),
                     _buildSingleCartProduct(),
-                 ],
+                    _buildSingleCartProduct(),
+                  ],
                 ),
-               
                 Container(
                   height: 150,
                   child: Column(

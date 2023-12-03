@@ -132,17 +132,15 @@ class _LoginViewState extends State<LoginView> {
                 Container(
                   height: 180,
                   width: double.infinity,
-                  child:  Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        "Login",
-                        style: GoogleFonts.plusJakartaSans(
+                      Text("Login",
+                          style: GoogleFonts.plusJakartaSans(
                             fontSize: 40,
                             color: const Color(0xFF1B1A1A),
                             fontWeight: FontWeight.w700,
-                          )
-                      ),
+                          )),
                     ],
                   ),
                 ),
