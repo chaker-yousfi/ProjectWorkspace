@@ -136,8 +136,10 @@ class _SignUpViewState extends State<SignUpView> {
           MyButton(
               name: "Create Account",
               onPressed: () {
-                validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
+                //validation();
+                Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (ctx) => HomePageView()));
               }),
         ],
       ),

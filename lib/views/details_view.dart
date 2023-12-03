@@ -163,49 +163,54 @@ class _DetailsViewState extends State<DetailsView> {
   }
 
   Widget _buildQuantityPart() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        SizedBox(
-          height: 15,
-        ),
-        Text("Quantity", style: myStyle),
-        SizedBox(
-          height: 15,
-        ),
-        Container(
-          height: 40,
-          width: 100,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.cyan,
-          ),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  child: Icon(Icons.remove),
-                  onTap: () {
-                    setState(() {
-                      if (count > 1) {
-                        count--;
-                      }
-                    });
-                  },
-                ),
-                Text(
-                  count.toString(),
-                  style: myStyle,
-                ),
-                GestureDetector(
-                  child: Icon(Icons.add),
-                  onTap: () {
-                    setState(() {
-                      count++;
-                    });
-                  },
-                ),
-              ]),
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+
+          children: <Widget>[
+            SizedBox(
+              height: 15,
+            ),
+            Text("Quantity", style: myStyle),
+            SizedBox(
+              height: 15,
+            ),
+            Container(
+              height: 40,
+              width: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.cyan,
+              ),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    GestureDetector(
+                      child: Icon(Icons.remove),
+                      onTap: () {
+                        setState(() {
+                          if (count > 1) {
+                            count--;
+                          }
+                        });
+                      },
+                    ),
+                    Text(
+                      count.toString(),
+                      style: myStyle,
+                    ),
+                    GestureDetector(
+                      child: Icon(Icons.add),
+                      onTap: () {
+                        setState(() {
+                          count++;
+                        });
+                      },
+                    ),
+                  ]),
+            ),
+          ],
         ),
       ],
     );
