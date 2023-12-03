@@ -84,7 +84,7 @@ class _DetailsViewState extends State<DetailsView> {
                   Text(widget.name,
                       style: GoogleFonts.plusJakartaSans(
                           fontSize: 20, fontWeight: FontWeight.w800)),
-                  SizedBox(width: 160),
+                  SizedBox(width: 60),
                   Text(
                     widget.price.toString() + "DZD",
                     style: TextStyle(
@@ -267,7 +267,6 @@ class _DetailsViewState extends State<DetailsView> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-          // ignore: prefer_const_constructors
           icon: Icon(
             Icons.arrow_back,
             color: Colors.black,

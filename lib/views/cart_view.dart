@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/commons/colors.dart';
+import 'package:ecommerce_app/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ecommerce_app/views/details_view.dart';
 import '../views/checkout.dart';
 import 'package:ecommerce_app/commons/images.dart';
 
@@ -138,7 +140,16 @@ class _CartViewState extends State<CartView> {
             Icons.arrow_back,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (ctx) => DetailsView(
+                    image: widget.image,
+                    name: widget.name,
+                    price: widget.price),
+              ),
+            );
+          },
         ),
         actions: <Widget>[
           IconButton(
