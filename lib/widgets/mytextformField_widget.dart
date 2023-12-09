@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 class MyTextFormField extends StatelessWidget {
+  final String Function(String?)? validator;
   final String name;
 
   const MyTextFormField({
-    Key? key,
     required this.name,
-    required String? Function(dynamic value) validator,
-  }) : super(key: key);
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator,
       decoration: InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0)),
           hintText: name,

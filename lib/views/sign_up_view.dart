@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
+import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,10 @@ class SignUpView extends StatefulWidget {
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+String p =
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
+RegExp regExp = RegExp(p);
 bool isObscureText = true;
 
 class _SignUpViewState extends State<SignUpView> {
@@ -29,157 +33,116 @@ class _SignUpViewState extends State<SignUpView> {
     }
   }
 
-  Widget _buildAllTextFormField() {
-    return Container(
-      height: 330,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          MyTextFormField(
-            name: "User Name",
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Please enter your username";
-              } else if (value.length < 6) {
-                return "Username is too short";
-              }
-              return "";
-            },
-          ),
-          MyTextFormField(
-            name: "Email",
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Please enter your email";
-              } else if (!emailRegex.hasMatch(value)) {
-                return "Invalid email";
-              }
-              return null;
-            },
-          ),
-          PasswordTextFormField(
-            obserText: isObscureText,
-            name: "Password",
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Enter your password";
-              } else if (value.length < 8) {
-                return "Your password is too short";
-              }
-              return null;
-            },
-            onTap: () {
-              FocusScope.of(context).unfocus();
-              setState(() {
-                isObscureText = !isObscureText;
-              });
-            },
-          ),
-          MyTextFormField(
-            name: "Phone Number",
-            validator: (value) {
-              if (value!.isEmpty) {
-                return "Please enter your phone number";
-              } else if (value.length < 10) {
-                return "Phone number must be 10 digits";
-              }
-              return "";
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBottomPart() {
-    return Container(
-      height: 500,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 10,
-      ),
-      width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildAllTextFormField(),
-          Padding(
-            padding: const EdgeInsets.only(left: 50, top: 20),
-            child: Row(
-              children: <Widget>[
-                const Text("Already have an account?"),
-                const SizedBox(
-                  width: 10,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (ctx) => LoginView(),
-                      ),
-                    );
-                  },
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.cyan,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          MyButton(
-              name: "Create Account",
-              onPressed: () {
-                validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
-              }),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    height: 180,
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          "Sign up",
-                          style: GoogleFonts.plusJakartaSans(
-                            fontSize: 40,
-                            color: const Color(0xFF1B1A1A),
-                            fontWeight: FontWeight.w700,
-                          ),
+        child: Form(
+          key: _formKey,
+          child: Container(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 250,
+                  width: double.infinity,
+                  child: const Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        "Register",
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 30,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 400,
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 10,
                   ),
-                  _buildBottomPart(),
-                ],
-              ),
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      MyTextFormField(
+                        name: "Username",
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter your username";
+                          } else if (value.length < 6) {
+                            return "Username is too short";
+                          }
+                          return "";
+                        },
+                      ),
+                      MyTextFormField(
+                        name: "Email",
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter your email";
+                          } else if (!emailRegex.hasMatch(value)) {
+                            return ("Invalid email");
+                          }
+                          return ("");
+                        },
+                      ),
+                      PasswordTextFormField(
+                        obserText: isObscureText,
+                        name: "Password",
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ("Enter your password");
+                          } else if (value.length < 8) {
+                            return ("Your password is too short");
+                          }
+                          return ("");
+                        },
+                        onTap: () {
+                          FocusScope.of(context).unfocus();
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                      ),
+                      MyTextFormField(
+                        name: "Phone Number",
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Please enter your phone number";
+                          } else if (value.length < 10) {
+                            return "Phone number must be 10 digits";
+                          }
+                          return "";
+                        },
+                      ),
+                      MyButton(
+                        name: "Register",
+                        onPressed: () {
+                          validation();
+                        },
+                      ),
+                      ChangeScreen(
+                        name: 'Login',
+                        onTap: () {
+                          Navigator.of(context).pushReplacement(
+                            MaterialPageRoute(
+                              builder: (ctx) => LoginView(),
+                            ),
+                          );
+                        },
+                        whichAccount: 'I already have an account',
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ),
