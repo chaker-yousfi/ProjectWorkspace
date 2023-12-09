@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
+import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,10 @@ class SignUpView extends StatefulWidget {
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+String p =
+    r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
+RegExp regExp = RegExp(p);
 bool isObscureText = true;
 
 class _SignUpViewState extends State<SignUpView> {
@@ -36,7 +40,7 @@ class _SignUpViewState extends State<SignUpView> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           MyTextFormField(
-            name: "User Name",
+            name: "Username",
             validator: (value) {
               if (value!.isEmpty) {
                 return "Please enter your username";
@@ -52,9 +56,9 @@ class _SignUpViewState extends State<SignUpView> {
               if (value!.isEmpty) {
                 return "Please enter your email";
               } else if (!emailRegex.hasMatch(value)) {
-                return "Invalid email";
+                return ("Invalid email");
               }
-              return null;
+              return ("");
             },
           ),
           PasswordTextFormField(
@@ -62,11 +66,11 @@ class _SignUpViewState extends State<SignUpView> {
             name: "Password",
             validator: (value) {
               if (value!.isEmpty) {
-                return "Enter your password";
+                return ("Enter your password");
               } else if (value.length < 8) {
-                return "Your password is too short";
+                return ("Your password is too short");
               }
-              return null;
+              return ("");
             },
             onTap: () {
               FocusScope.of(context).unfocus();
@@ -137,7 +141,7 @@ class _SignUpViewState extends State<SignUpView> {
               name: "Create Account",
               onPressed: () {
                 validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
+                // Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),
