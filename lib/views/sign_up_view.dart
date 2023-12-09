@@ -141,7 +141,7 @@ class _SignUpViewState extends State<SignUpView> {
               name: "Create Account",
               onPressed: () {
                 validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
+                // Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),
@@ -153,32 +153,37 @@ class _SignUpViewState extends State<SignUpView> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 250,
-                  width: double.infinity,
-                  child: const Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Register",
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    height: 180,
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          "Sign up",
+                          style: GoogleFonts.plusJakartaSans(
+                            fontSize: 40,
+                            color: const Color(0xFF1B1A1A),
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                _buildBottomPart(),
-              ],
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  _buildBottomPart(),
+                ],
+              ),
             ),
           ),
         ),

@@ -111,7 +111,7 @@ class _LoginViewState extends State<LoginView> {
               name: "Login",
               onPressed: () {
                 validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
+                // Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),
@@ -129,22 +129,23 @@ class _LoginViewState extends State<LoginView> {
             child: Column(
               children: <Widget>[
                 Container(
-                  height: 250,
+                  height: 180,
                   width: double.infinity,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
                         "Login",
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 40,
+                          color: const Color(0xFF1B1A1A),
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 _buildBottomPart(),
