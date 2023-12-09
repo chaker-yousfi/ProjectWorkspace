@@ -29,6 +29,95 @@ class _LoginViewState extends State<LoginView> {
     }
   }
 
+  Widget _buildAllTextFormField() {
+    return Container(
+      height: 230,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          MyTextFormField(
+            name: "Email",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your email";
+              } else if (!emailRegex.hasMatch(value)) {
+                return ("Invalid email");
+              }
+              return ("");
+            },
+          ),
+          PasswordTextFormField(
+            obserText: isObscureText,
+            name: "Password",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return ("Enter your password");
+              } else if (value.length < 8) {
+                return ("Your password is too short");
+              }
+              return ("");
+            },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                isObscureText = !isObscureText;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomPart() {
+    return Container(
+      height: 400,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      width: double.infinity,
+      child: Column(
+        children: <Widget>[
+          _buildAllTextFormField(),
+          Row(
+            children: <Widget>[
+              const Text("Don't have an account?"),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (ctx) => SignUpView(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Sign up",
+                  style: TextStyle(
+                    color: Colors.cyan,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 70,
+          ),
+          MyButton(
+              name: "Login",
+              onPressed: () {
+                validation();
+                Navigator.pushNamed(context, HomePageView.pageRoute);
+              }),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,66 +145,9 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
-                Container(
-                  height: 200,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      MyTextFormField(
-                        name: "Email",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your email";
-                          } else if (!emailRegex.hasMatch(value)) {
-                            return ("Invalid email");
-                          }
-                          return ("");
-                        },
-                      ),
-                      PasswordTextFormField(
-                        obserText: isObscureText,
-                        name: "Password",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return ("Enter your password");
-                          } else if (value.length < 8) {
-                            return ("Your password is too short");
-                          }
-                          return ("");
-                        },
-                        onTap: () {
-                          FocusScope.of(context).unfocus();
-                          setState(() {
-                            isObscureText = !isObscureText;
-                          });
-                        },
-                      ),
-                      MyButton(
-                        name: "Login",
-                        onPressed: () {
-                          validation();
-                        },
-                      ),
-                      ChangeScreen(
-                        name: 'Sign up',
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (ctx) => SignUpView(),
-                            ),
-                          );
-                        },
-                        whichAccount: 'I do not have an account',
-                      ),
-                    ],
-                  ),
-                ),
+                _buildBottomPart(),
               ],
             ),
           ),

@@ -33,6 +33,121 @@ class _SignUpViewState extends State<SignUpView> {
     }
   }
 
+  Widget _buildAllTextFormField() {
+    return Container(
+      height: 330,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          MyTextFormField(
+            name: "Username",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your username";
+              } else if (value.length < 6) {
+                return "Username is too short";
+              }
+              return "";
+            },
+          ),
+          MyTextFormField(
+            name: "Email",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your email";
+              } else if (!emailRegex.hasMatch(value)) {
+                return ("Invalid email");
+              }
+              return ("");
+            },
+          ),
+          PasswordTextFormField(
+            obserText: isObscureText,
+            name: "Password",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return ("Enter your password");
+              } else if (value.length < 8) {
+                return ("Your password is too short");
+              }
+              return ("");
+            },
+            onTap: () {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                isObscureText = !isObscureText;
+              });
+            },
+          ),
+          MyTextFormField(
+            name: "Phone Number",
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Please enter your phone number";
+              } else if (value.length < 10) {
+                return "Phone number must be 10 digits";
+              }
+              return "";
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomPart() {
+    return Container(
+      height: 500,
+      margin: const EdgeInsets.symmetric(
+        horizontal: 10,
+      ),
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildAllTextFormField(),
+          Padding(
+            padding: const EdgeInsets.only(left: 50, top: 20),
+            child: Row(
+              children: <Widget>[
+                const Text("Already have an account?"),
+                const SizedBox(
+                  width: 10,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (ctx) => LoginView(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      color: Colors.cyan,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          MyButton(
+              name: "Create Account",
+              onPressed: () {
+                validation();
+                Navigator.pushNamed(context, HomePageView.pageRoute);
+              }),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,86 +177,7 @@ class _SignUpViewState extends State<SignUpView> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  height: 400,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                  ),
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      MyTextFormField(
-                        name: "Username",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your username";
-                          } else if (value.length < 6) {
-                            return "Username is too short";
-                          }
-                          return "";
-                        },
-                      ),
-                      MyTextFormField(
-                        name: "Email",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your email";
-                          } else if (!emailRegex.hasMatch(value)) {
-                            return ("Invalid email");
-                          }
-                          return ("");
-                        },
-                      ),
-                      PasswordTextFormField(
-                        obserText: isObscureText,
-                        name: "Password",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return ("Enter your password");
-                          } else if (value.length < 8) {
-                            return ("Your password is too short");
-                          }
-                          return ("");
-                        },
-                        onTap: () {
-                          FocusScope.of(context).unfocus();
-                          setState(() {
-                            isObscureText = !isObscureText;
-                          });
-                        },
-                      ),
-                      MyTextFormField(
-                        name: "Phone Number",
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please enter your phone number";
-                          } else if (value.length < 10) {
-                            return "Phone number must be 10 digits";
-                          }
-                          return "";
-                        },
-                      ),
-                      MyButton(
-                        name: "Register",
-                        onPressed: () {
-                          validation();
-                        },
-                      ),
-                      ChangeScreen(
-                        name: 'Login',
-                        onTap: () {
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (ctx) => LoginView(),
-                            ),
-                          );
-                        },
-                        whichAccount: 'I already have an account',
-                      ),
-                    ],
-                  ),
-                ),
+                _buildBottomPart(),
               ],
             ),
           ),
