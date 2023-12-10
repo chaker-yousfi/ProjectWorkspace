@@ -22,13 +22,6 @@ class MyApp extends StatelessWidget {
             // scaffoldBackgroundColor: Colors.white,
             // visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
-<<<<<<< HEAD
         home: WelcomeView());
-=======
-        home: WelcomeView(),
-        routes: {
-          HomePageView.pageRoute: (ctx) => HomePageView(),
-        });
->>>>>>> a158b6775d7868f9d2702943430d25a7e7f16ee3
   }
 }

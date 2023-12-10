@@ -42,18 +42,11 @@ class _HomePageViewState extends State<HomePageView> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-<<<<<<< HEAD
               "loukmane",
               style: GoogleFonts.plusJakartaSans(
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: FontWeight.w700),
-=======
-              "G4-25",
-              style: TextStyle(
-                color: Colors.black,
-              ),
->>>>>>> a158b6775d7868f9d2702943430d25a7e7f16ee3
             ),
             currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/sport.png')),
@@ -61,18 +54,11 @@ class _HomePageViewState extends State<HomePageView> {
               color: Color(0xfff2f2f2),
             ),
             accountEmail: Text(
-<<<<<<< HEAD
               "loukmane@email.com",
               style: GoogleFonts.plusJakartaSans(
                   color: Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
-=======
-              "g4-25@email.com",
-              style: TextStyle(
-                color: Colors.black,
-              ),
->>>>>>> a158b6775d7868f9d2702943430d25a7e7f16ee3
             ),
           ),
           ListTile(

@@ -181,22 +181,14 @@ class _DetailsViewState extends State<DetailsView> {
     return Row(
       children: [
         Column(
-<<<<<<< HEAD
           crossAxisAlignment: CrossAxisAlignment.start,
 
-=======
-          crossAxisAlignment: CrossAxisAlignment.center,
->>>>>>> a158b6775d7868f9d2702943430d25a7e7f16ee3
           children: <Widget>[
             SizedBox(
               height: 15,
             ),
-<<<<<<< HEAD
-            Text("Quantity", style: myStyle),
-=======
             Text("Quantity",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
->>>>>>> a158b6775d7868f9d2702943430d25a7e7f16ee3
             SizedBox(
               height: 15,
             ),
@@ -204,14 +196,8 @@ class _DetailsViewState extends State<DetailsView> {
               height: 40,
               width: 100,
               decoration: BoxDecoration(
-<<<<<<< HEAD
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.cyan,
-              ),
-=======
                   borderRadius: BorderRadius.circular(30),
                   color: Color(0xff9b96d6)),
->>>>>>> a158b6775d7868f9d2702943430d25a7e7f16ee3
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
