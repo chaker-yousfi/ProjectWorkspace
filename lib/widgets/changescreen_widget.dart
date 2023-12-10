@@ -6,8 +6,11 @@ class ChangeScreen extends StatelessWidget {
   final String name;
 
   // Use required for non-nullable parameters
-  ChangeScreen(
-      {required this.name, required this.onTap, required this.whichAccount});
+  ChangeScreen({
+    required this.name,
+    required this.onTap,
+    required this.whichAccount,
+  });
 
   @override
   Widget build(BuildContext context) {

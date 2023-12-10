@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyButton extends StatelessWidget {
-  final VoidCallback onPressed;
+  final void Function()? onPressed;
   final String name;
 
-  const MyButton({Key? key, required this.name, required this.onPressed})
-      : super(key: key);
+  const MyButton({
+    Key? key,
+    required this.name,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +25,12 @@ class MyButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        child: Text(
-          name,
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          )
-        ),
+        child: Text(name,
+            style: GoogleFonts.plusJakartaSans(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
+            )),
       ),
     );
   }

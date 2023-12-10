@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/utilities/regex_utility.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/sign_up_view.dart';
+import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,6 @@ class LoginView extends StatefulWidget {
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 bool isObscureText = true;
 
 class _LoginViewState extends State<LoginView> {
@@ -41,9 +41,9 @@ class _LoginViewState extends State<LoginView> {
               if (value!.isEmpty) {
                 return "Please enter your email";
               } else if (!emailRegex.hasMatch(value)) {
-                return "Invalid email";
+                return ("Invalid email");
               }
-              return null;
+              return ("");
             },
           ),
           PasswordTextFormField(
@@ -51,11 +51,11 @@ class _LoginViewState extends State<LoginView> {
             name: "Password",
             validator: (value) {
               if (value!.isEmpty) {
-                return "Enter your password";
+                return ("Enter your password");
               } else if (value.length < 8) {
-                return "Your password is too short";
+                return ("Your password is too short");
               }
-              return null;
+              return ("");
             },
             onTap: () {
               FocusScope.of(context).unfocus();
@@ -77,7 +77,6 @@ class _LoginViewState extends State<LoginView> {
       ),
       width: double.infinity,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildAllTextFormField(),
           Row(
@@ -112,7 +111,7 @@ class _LoginViewState extends State<LoginView> {
               name: "Login",
               onPressed: () {
                 validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
+                // Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),
@@ -135,12 +134,14 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text("Login",
-                          style: GoogleFonts.plusJakartaSans(
-                            fontSize: 40,
-                            color: const Color(0xFF1B1A1A),
-                            fontWeight: FontWeight.w700,
-                          )),
+                      Text(
+                        "Login",
+                        style: GoogleFonts.plusJakartaSans(
+                          fontSize: 40,
+                          color: const Color(0xFF1B1A1A),
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
                     ],
                   ),
                 ),
