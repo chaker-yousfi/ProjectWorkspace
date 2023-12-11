@@ -181,7 +181,8 @@ class _DetailsViewState extends State<DetailsView> {
     return Row(
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+
           children: <Widget>[
             SizedBox(
               height: 15,

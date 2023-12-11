@@ -4,6 +4,7 @@ import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/mybutton_widget.dart';
@@ -18,12 +19,31 @@ class LoginView extends StatefulWidget {
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 bool isObscureText = true;
+String? email;
+String? password;
 
 class _LoginViewState extends State<LoginView> {
-  void validation() {
+  void validation() async {
     final FormState? _form = _formKey.currentState;
     if (_form!.validate()) {
-      developer.log("Yes");
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email!, password: password!);
+
+        // User creation successful
+        User? user = userCredential.user;
+        if (user != null) {
+          print('Sign in ${user.uid}');
+        }
+      } catch (e) {
+        print('Error creating user: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
     } else {
       developer.log("No");
     }
@@ -37,6 +57,12 @@ class _LoginViewState extends State<LoginView> {
         children: <Widget>[
           MyTextFormField(
             name: "Email",
+            onChanged: (value) {
+              setState(() {
+                email = value;
+              });
+              return '';
+            },
             validator: (value) {
               if (value!.isEmpty) {
                 return "Please enter your email";
@@ -49,6 +75,12 @@ class _LoginViewState extends State<LoginView> {
           PasswordTextFormField(
             obserText: isObscureText,
             name: "Password",
+            onChanged: (value) {
+              setState(() {
+                password = value;
+              });
+              return '';
+            },
             validator: (value) {
               if (value!.isEmpty) {
                 return ("Enter your password");
@@ -111,7 +143,7 @@ class _LoginViewState extends State<LoginView> {
               name: "Login",
               onPressed: () {
                 validation();
-                // Navigator.pushNamed(context, HomePageView.pageRoute);
+                Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),

@@ -5,12 +5,15 @@ class PasswordTextFormField extends StatelessWidget {
   final String Function(String?)? validator;
   final String name;
   final void Function()? onTap;
+  final String Function(String?)? onChanged;
+
 
   PasswordTextFormField({
     required this.obserText,
     this.validator,
     required this.name,
     this.onTap,
+    this.onChanged,
   });
 
   @override
@@ -18,6 +21,7 @@ class PasswordTextFormField extends StatelessWidget {
     return TextFormField(
       obscureText: obserText,
       validator: validator,
+      onChanged: onChanged,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),

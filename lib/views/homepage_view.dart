@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/commons/images.dart';
+import 'package:ecommerce_app/views/cart_view.dart';
 import 'package:ecommerce_app/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
@@ -41,10 +42,11 @@ class _HomePageViewState extends State<HomePageView> {
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
-              "G4-25",
-              style: TextStyle(
-                color: Colors.black,
-              ),
+              "loukmane",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700),
             ),
             currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/sport.png')),
@@ -52,10 +54,11 @@ class _HomePageViewState extends State<HomePageView> {
               color: Color(0xfff2f2f2),
             ),
             accountEmail: Text(
-              "g4-25@email.com",
-              style: TextStyle(
-                color: Colors.black,
-              ),
+              "loukmane@email.com",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
             ),
           ),
           ListTile(
@@ -70,11 +73,19 @@ class _HomePageViewState extends State<HomePageView> {
               });
             },
             leading: Icon(Icons.home),
-            title: Text("Home"),
+            title: Text(
+              "Home",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
           ListTile(
             selected: cartColor,
             onTap: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (ctx) =>CartView()));
               setState(() {
                 homeColor = false;
                 cartColor = true;
@@ -83,7 +94,13 @@ class _HomePageViewState extends State<HomePageView> {
               });
             },
             leading: Icon(Icons.shopping_cart),
-            title: Text("Cart"),
+            title: Text(
+              "Cart",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
           ListTile(
             selected: aboutUsColor,
@@ -96,7 +113,13 @@ class _HomePageViewState extends State<HomePageView> {
               });
             },
             leading: Icon(Icons.info),
-            title: Text("About us"),
+            title: Text(
+              "About us",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
           ListTile(
             selected: contactUsColor,
@@ -109,12 +132,24 @@ class _HomePageViewState extends State<HomePageView> {
               });
             },
             leading: Icon(Icons.mail),
-            title: Text("Contact us"),
+            title: Text(
+              "Contact us",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
           ListTile(
             onTap: () {},
             leading: Icon(Icons.exit_to_app),
-            title: Text("Logout"),
+            title: Text(
+              "Logout",
+              style: GoogleFonts.plusJakartaSans(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
+            ),
           ),
         ],
       ),
