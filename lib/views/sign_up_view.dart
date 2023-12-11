@@ -1,13 +1,14 @@
+import 'dart:developer' as developer;
+
 import 'package:ecommerce_app/utilities/regex_utility.dart';
-import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
-import 'package:ecommerce_app/widgets/changescreen_widget.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../widgets/mybutton_widget.dart';
-import 'dart:developer' as developer;
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -17,17 +18,39 @@ class SignUpView extends StatefulWidget {
 }
 
 final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
 String p =
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
 RegExp regExp = RegExp(p);
 bool isObscureText = true;
+String? email;
+String? password;
 
 class _SignUpViewState extends State<SignUpView> {
-  void validation() {
+  void validation() async {
     final FormState? _form = _formKey.currentState;
-    if (_form!.validate()) {
-      developer.log("Yes");
+    if (!_form!.validate()) {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email!,
+          password: password!,
+        );
+        // User creation successful
+        User? user = userCredential.user;
+        if (user != null) {
+          print('User created: ${user.uid}');
+        }
+      } catch (e) {
+        print('Error creating user: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(e.toString()),
+                duration: Duration(seconds: 2),
+          ),
+        );
+      }
     } else {
       developer.log("No");
     }
@@ -52,6 +75,13 @@ class _SignUpViewState extends State<SignUpView> {
           ),
           MyTextFormField(
             name: "Email",
+            onChanged: (value) {
+              setState(() {
+                email = value;
+                print(email);
+              });
+              return '';
+            },
             validator: (value) {
               if (value!.isEmpty) {
                 return "Please enter your email";
@@ -64,6 +94,13 @@ class _SignUpViewState extends State<SignUpView> {
           PasswordTextFormField(
             obserText: isObscureText,
             name: "Password",
+            onChanged: (value) {
+              setState(() {
+                password = value;
+                print(password);
+              });
+              return '';
+            },
             validator: (value) {
               if (value!.isEmpty) {
                 return ("Enter your password");
@@ -141,7 +178,7 @@ class _SignUpViewState extends State<SignUpView> {
               name: "Create Account",
               onPressed: () {
                 validation();
-                // Navigator.pushNamed(context, HomePageView.pageRoute);
+                //Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),

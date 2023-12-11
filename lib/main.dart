@@ -1,12 +1,15 @@
-import 'package:ecommerce_app/views/cart_view.dart';
-import 'package:ecommerce_app/views/login_view.dart';
-import 'package:ecommerce_app/views/sign_up_view.dart';
 import 'package:ecommerce_app/views/welcome_view.dart';
-import 'package:ecommerce_app/views/homepage_view.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
