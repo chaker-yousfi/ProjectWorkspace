@@ -2,9 +2,7 @@ import 'package:ecommerce_app/commons/colors.dart';
 import 'package:ecommerce_app/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ecommerce_app/views/details_view.dart';
 import '../views/checkout.dart';
-import 'package:ecommerce_app/commons/images.dart';
 
 class CartView extends StatefulWidget {
   final double price;

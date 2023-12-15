@@ -1,17 +1,35 @@
 import 'package:ecommerce_app/commons/images.dart';
+import 'package:ecommerce_app/provider/category_provider.dart';
+import 'package:ecommerce_app/provider/product_provider.dart';
 import 'package:ecommerce_app/views/cart_view.dart';
 import 'package:ecommerce_app/views/details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lecle_flutter_carousel_pro/lecle_flutter_carousel_pro.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '/views/list_product_view.dart';
 import '/widgets/single_product_widget.dart';
+import '../model/product.dart';
 
 class HomePageView extends StatefulWidget {
   static const String pageRoute = "/homepageview";
   @override
   State<HomePageView> createState() => _HomePageViewState();
 }
+
+late CategoryProvider categoryProvider;
+late ProductProvider productProvider;
+Product? mcaData;
+Product? dumbbleData;
+Product? psgData;
+Product? barcaData;
+var featureSnapShot;
+var newProductSnapShot;
+var shirt;
+var shoes;
+var shorts;
+var tracksuit;
+var gloves;
 
 class _HomePageViewState extends State<HomePageView> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -85,7 +103,7 @@ class _HomePageViewState extends State<HomePageView> {
             selected: cartColor,
             onTap: () {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (ctx) =>CartView()));
+                  MaterialPageRoute(builder: (ctx) => CartView()));
               setState(() {
                 homeColor = false;
                 cartColor = true;
@@ -188,6 +206,12 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
   Widget _buildCategory() {
+    List<Product> shirt = categoryProvider.getShirtList;
+    List<Product> shoes = categoryProvider.getShoesList;
+    List<Product> shorts = categoryProvider.getShortsList;
+    List<Product> tracksuit = categoryProvider.getTracksuitList;
+    List<Product> gloves = categoryProvider.getGlovesList;
+
     return Column(
       children: <Widget>[
         Container(
@@ -215,21 +239,85 @@ class _HomePageViewState extends State<HomePageView> {
           height: 60,
           child: Row(
             children: <Widget>[
-              _buildProductCategory(
-                image: categoryImage_1,
-                colorCode: 0xff33dcfd,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => ListProductView(
+                        name: "Football Shirts",
+                        snapShot: shirt,
+                      ),
+                    ),
+                  );
+                },
+                child: _buildProductCategory(
+                  image: categoryImage_1,
+                  colorCode: 0xff33dcfd,
+                ),
               ),
-              _buildProductCategory(
-                image: categoryImage_2,
-                colorCode: 0xff33dcfd,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => ListProductView(
+                        name: "Football Shoes",
+                        snapShot: shoes,
+                      ),
+                    ),
+                  );
+                },
+                child: _buildProductCategory(
+                  image: categoryImage_2,
+                  colorCode: 0xff33dcfd,
+                ),
               ),
-              _buildProductCategory(
-                image: categoryImage_3,
-                colorCode: 0xff33dcfd,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => ListProductView(
+                        name: "Football Shorts",
+                        snapShot: shorts,
+                      ),
+                    ),
+                  );
+                },
+                child: _buildProductCategory(
+                  image: categoryImage_3,
+                  colorCode: 0xff33dcfd,
+                ),
               ),
-              _buildProductCategory(
-                image: categoryImage_4,
-                colorCode: 0xff33dcfd,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => ListProductView(
+                        name: "Tracksuits",
+                        snapShot: tracksuit,
+                      ),
+                    ),
+                  );
+                },
+                child: _buildProductCategory(
+                  image: categoryImage_4,
+                  colorCode: 0xff33dcfd,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => ListProductView(
+                        name: "GK Gloves",
+                        snapShot: gloves,
+                      ),
+                    ),
+                  );
+                },
+                child: _buildProductCategory(
+                  image: categoryImage_5,
+                  colorCode: 0xff33dcfd,
+                ),
               ),
             ],
           ),
@@ -239,6 +327,8 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
   Widget _buildFeature() {
+    List<Product> featured = productProvider.getFeaturedList;
+
     return Column(
       children: <Widget>[
         Row(
@@ -256,8 +346,10 @@ class _HomePageViewState extends State<HomePageView> {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (contetx) =>
-                        ListProductView(name: "Featured Products"),
+                    builder: (contetx) => ListProductView(
+                      name: "Featured Products",
+                      snapShot: featured,
+                    ),
                   ),
                 );
               },
@@ -282,26 +374,28 @@ class _HomePageViewState extends State<HomePageView> {
                 onTap: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (ctx) => DetailsView(
-                          image: productImage_1,
-                          name: "Sneakers",
-                          price: 4000)));
+                          image: mcaData!.image,
+                          name: mcaData!.name,
+                          price: mcaData!.price)));
                 },
                 child: SingleProductWidget(
-                    name: "Sneakers", price: 4000, image: productImage_1),
+                    name: mcaData!.name,
+                    price: mcaData!.price,
+                    image: mcaData!.image),
               ),
             ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (ctx) => DetailsView(
-                        image: productImage_2,
-                        name: "Dumbbells Weights",
-                        price: 3000)));
+                        image: dumbbleData!.image,
+                        name: dumbbleData!.name,
+                        price: dumbbleData!.price)));
               },
               child: SingleProductWidget(
-                  name: "Dumbbells Weights",
-                  price: 3000,
-                  image: productImage_2),
+                  name: dumbbleData!.name,
+                  price: dumbbleData!.price,
+                  image: dumbbleData!.image),
             ),
           ],
         ),
@@ -310,6 +404,7 @@ class _HomePageViewState extends State<HomePageView> {
   }
 
   Widget _buildProducts() {
+    List<Product> newProduct = productProvider.getNewList;
     return Column(
       children: <Widget>[
         Container(
@@ -332,8 +427,10 @@ class _HomePageViewState extends State<HomePageView> {
                     onTap: () {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              ListProductView(name: "New Products"),
+                          builder: (context) => ListProductView(
+                            name: "New Products",
+                            snapShot: newProduct,
+                          ),
                         ),
                       );
                     },
@@ -362,25 +459,30 @@ class _HomePageViewState extends State<HomePageView> {
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
-                                image: productImage_3,
-                                name: "Sneakers",
-                                price: 5000)));
+                                  image: barcaData!.image,
+                                  name: barcaData!.name,
+                                  price: barcaData!.price,
+                                )));
                       },
                       child: SingleProductWidget(
-                          name: "Sneakers", price: 5000, image: productImage_3),
+                          name: barcaData!.name,
+                          price: barcaData!.price,
+                          image: barcaData!.image),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
-                                image: productImage_4,
-                                name: "Compression Shirt",
-                                price: 2000)));
+                                  image: psgData!.image,
+                                  name: psgData!.name,
+                                  price: psgData!.price,
+                                )));
                       },
                       child: SingleProductWidget(
-                          name: "Compression Shirt",
-                          price: 2000,
-                          image: productImage_4),
+                        name: psgData!.name,
+                        price: psgData!.price,
+                        image: psgData!.image,
+                      ),
                     ),
                   ],
                 ),
@@ -394,6 +496,16 @@ class _HomePageViewState extends State<HomePageView> {
 
   @override
   Widget build(BuildContext context) {
+    categoryProvider = Provider.of<CategoryProvider>(context);
+    categoryProvider.getShirtData();
+    categoryProvider.getShoesData();
+    categoryProvider.getShortsData();
+    categoryProvider.getTracksuitData();
+    categoryProvider.getGlovesData();
+    productProvider = Provider.of<ProductProvider>(context);
+    productProvider.getFeaturedData();
+    productProvider.getNewData();
+
     return Scaffold(
       key: _key,
       drawer: _buildMyDrawer(),

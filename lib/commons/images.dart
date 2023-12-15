@@ -9,7 +9,8 @@ const homepageImage_4 = "assets/images/to_be_completed";
 const categoryImage_1 = "assets/images/Tshirt.png";
 const categoryImage_2 = "assets/images/Shoe.png";
 const categoryImage_3 = "assets/images/Drawstring.png";
-const categoryImage_4 = "assets/images/Weight.png";
+const categoryImage_4 = "assets/images/tracksuit.png";
+const categoryImage_5 = "assets/images/gloves.png";
 
 const productImage_1 = "assets/images/Nike Sneakers_fr.jpeg";
 const productImage_2 = "assets/images/Dumbbells_Weights.jpeg";

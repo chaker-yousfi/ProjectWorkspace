@@ -5,8 +5,7 @@ class SingleProductWidget extends StatelessWidget {
   final String image;
   final double price;
   final String name;
-  const SingleProductWidget({
-    super.key,
+  SingleProductWidget({
     required this.image,
     required this.price,
     required this.name,
@@ -18,7 +17,6 @@ class SingleProductWidget extends StatelessWidget {
       child: Container(
         height: 250,
         width: 160,
-        
         child: Column(
           children: <Widget>[
             Container(
@@ -33,7 +31,7 @@ class SingleProductWidget extends StatelessWidget {
                       20), // Rounded border for the inner Container holding the image
                   image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage(image),
+                    image: NetworkImage(image),
                   ),
                 ),
               ),
@@ -46,12 +44,15 @@ class SingleProductWidget extends StatelessWidget {
                 color: Color(0xff9b96d6),
               ),
             ),
-            Text(
-              "$name",
-              style: GoogleFonts.plusJakartaSans(
-                color: Color(0xFF1B1A1A),
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
+            Container(
+              width: 200,
+              child: Text(
+                "$name",
+                style: GoogleFonts.plusJakartaSans(
+                  color: Color(0xFF1B1A1A),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],

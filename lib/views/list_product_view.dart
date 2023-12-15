@@ -1,12 +1,12 @@
-import 'package:ecommerce_app/commons/images.dart';
-import 'package:ecommerce_app/views/homepage_view.dart';
-import '/widgets/single_product_widget.dart';
+import 'package:ecommerce_app/model/product.dart';
+import 'package:ecommerce_app/widgets/single_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ListProductView extends StatelessWidget {
   final String name;
-  const ListProductView({super.key, required this.name});
+  final List<Product> snapShot;
+  const ListProductView({required this.name, required this.snapShot});
 
   @override
   Widget build(BuildContext context) {
@@ -14,19 +14,7 @@ class ListProductView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => HomePageView(),
-              ),
-            );
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
-          ),
-        ),
+        iconTheme: IconThemeData(color: Colors.black),
         actions: <Widget>[
           IconButton(
             onPressed: () {},
@@ -76,38 +64,22 @@ class ListProductView extends StatelessWidget {
                   height: 10,
                 ),
                 Container(
-                    height: 700,
-                    child: GridView.count(
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.7,
-                      children: <Widget>[
-                        SingleProductWidget(
-                            name: "Nike Sneakers",
-                            price: 4000,
-                            image: productImage_1),
-                        SingleProductWidget(
-                            name: "Dumbbells Weights",
-                            price: 3000,
-                            image: productImage_2),
-                        SingleProductWidget(
-                            name: "Nike Sneakers",
-                            price: 5000,
-                            image: productImage_3),
-                        SingleProductWidget(
-                            name: "Compression Shirt",
-                            price: 2500,
-                            image: productImage_4),
-                        SingleProductWidget(
-                            name: "Nike Sneakers",
-                            price: 4000,
-                            image: productImage_1),
-                        SingleProductWidget(
-                            name: "Nike Sneakers",
-                            price: 4000,
-                            image: productImage_1),
-                      ],
-                    ))
+                  height: 700,
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.55,
+                    scrollDirection: Axis.vertical,
+                    children: snapShot
+                        .map(
+                          (e) => SingleProductWidget(
+                            image: e.image,
+                            price: e.price,
+                            name: e.name,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                )
               ],
             ),
           ],

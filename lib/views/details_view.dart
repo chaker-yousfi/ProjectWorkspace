@@ -10,7 +10,6 @@ class DetailsView extends StatefulWidget {
   final String name;
   final String image;
   final double price;
-  // ignore: use_key_in_widget_constructors
   DetailsView({required this.image, required this.name, required this.price});
   @override
   State<DetailsView> createState() => _DetailsViewState();
@@ -60,7 +59,7 @@ class _DetailsViewState extends State<DetailsView> {
                 borderRadius: BorderRadius.circular(15),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(widget.image),
+                  image: NetworkImage(widget.image),
                 ),
               ),
             ),
@@ -182,7 +181,6 @@ class _DetailsViewState extends State<DetailsView> {
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: <Widget>[
             SizedBox(
               height: 15,
