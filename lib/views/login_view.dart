@@ -143,7 +143,11 @@ class _LoginViewState extends State<LoginView> {
               name: "Login",
               onPressed: () {
                 validation();
-                Navigator.pushNamed(context, HomePageView.pageRoute);
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (ctx) => HomePageView(),
+                    ),
+                  );
               }),
         ],
       ),

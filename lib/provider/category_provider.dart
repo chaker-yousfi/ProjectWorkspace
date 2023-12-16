@@ -28,6 +28,7 @@ class CategoryProvider with ChangeNotifier {
       },
     );
     shirt = newList;
+    notifyListeners();
   }
 
   List<Product> get getShirtList {
@@ -49,6 +50,7 @@ class CategoryProvider with ChangeNotifier {
       },
     );
     shoes = newList;
+    notifyListeners();
   }
 
   List<Product> get getShoesList {
@@ -70,6 +72,7 @@ class CategoryProvider with ChangeNotifier {
       },
     );
     shorts = newList;
+    notifyListeners();
   }
 
   List<Product> get getShortsList {
@@ -91,6 +94,7 @@ class CategoryProvider with ChangeNotifier {
       },
     );
     tracksuit = newList;
+    notifyListeners();
   }
 
   List<Product> get getTracksuitList {
@@ -112,6 +116,7 @@ class CategoryProvider with ChangeNotifier {
       },
     );
     gloves = newList;
+    notifyListeners();
   }
 
   List<Product> get getGlovesList {

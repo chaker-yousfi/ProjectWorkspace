@@ -15,7 +15,7 @@ class SingleProductWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 250,
+        height: 280,
         width: 160,
         child: Column(
           children: <Widget>[
