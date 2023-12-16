@@ -22,6 +22,46 @@ class ProductProvider with ChangeNotifier {
     featured = newList;
   }
 
+  List<Product> homeFeatured = [];
+  late Product homeFeaturedData;
+  Future<void> getHomeFeaturedData() async {
+    List<Product> newList = [];
+    QuerySnapshot featuredSnapShot =
+        await FirebaseFirestore.instance.collection("homefeatured").get();
+    featuredSnapShot.docs.forEach(
+      (element) {
+        featuredData = Product(
+            element["image"], element["name"], element["price"].toDouble());
+        newList.add(featuredData);
+      },
+    );
+    homeFeatured = newList;
+    notifyListeners();
+  }
+  List<Product> homeNew = [];
+  late Product homeNewData;
+  Future<void> getHomeNewData() async {
+    List<Product> newList = [];
+    QuerySnapshot featuredSnapShot =
+        await FirebaseFirestore.instance.collection("homenew").get();
+    featuredSnapShot.docs.forEach(
+      (element) {
+        featuredData = Product(
+            element["image"], element["name"], element["price"].toDouble());
+        newList.add(featuredData);
+      },
+    );
+    homeNew = newList;
+    notifyListeners();
+  }
+  List<Product> get getHomeNewList {
+    return homeNew;
+  }
+
+  List<Product> get getHomeFeaturedList {
+    return homeFeatured;
+  }
+
   List<Product> get getFeaturedList {
     return featured;
   }
@@ -46,6 +86,7 @@ class ProductProvider with ChangeNotifier {
       },
     );
     newproduct = newList;
+    notifyListeners();
   }
 
   List<Product> get getNewList {

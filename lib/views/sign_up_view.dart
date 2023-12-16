@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:ecommerce_app/utilities/regex_utility.dart';
+import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:ecommerce_app/widgets/mytextformField_widget.dart';
 import 'package:ecommerce_app/widgets/passwordtextformfield_widget.dart';
@@ -178,7 +179,7 @@ class _SignUpViewState extends State<SignUpView> {
               name: "Create Account",
               onPressed: () {
                 validation();
-                //Navigator.pushNamed(context, HomePageView.pageRoute);
+                Navigator.pushNamed(context, HomePageView.pageRoute);
               }),
         ],
       ),

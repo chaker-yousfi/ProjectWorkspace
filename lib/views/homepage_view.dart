@@ -328,6 +328,7 @@ class _HomePageViewState extends State<HomePageView> {
 
   Widget _buildFeature() {
     List<Product> featured = productProvider.getFeaturedList;
+    List<Product> homeFeatured = productProvider.getHomeFeaturedList;
 
     return Column(
       children: <Widget>[
@@ -365,40 +366,52 @@ class _HomePageViewState extends State<HomePageView> {
           ],
         ),
         Row(
-          children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (ctx) => DetailsView(
-                          image: mcaData!.image,
-                          name: mcaData!.name,
-                          price: mcaData!.price)));
-                },
-                child: SingleProductWidget(
-                    name: mcaData!.name,
-                    price: mcaData!.price,
-                    image: mcaData!.image),
-              ),
+            children: homeFeatured.map((e) {
+          return Expanded(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (ctx) => DetailsView(
+                                  image: e.image,
+                                  name: e.name,
+                                  price: e.price,
+                                )));
+                      },
+                      child: SingleProductWidget(
+                          name: e.name, price: e.price, image: e.image),
+                    ),
+                  ),
+                ),
+
+                // Container(
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(30),
+                //   ),
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       Navigator.of(context).pushReplacement(MaterialPageRoute(
+                //           builder: (ctx) => DetailsView(
+                //               image: e.image,
+                //               name: e.name,
+                //               price: e.price)));
+                //     },
+                //     child: SingleProductWidget(
+                //         name: e.name,
+                //         price: e.price,
+                //         image: e.image),
+                //   ),
+                // ),
+              ],
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (ctx) => DetailsView(
-                        image: dumbbleData!.image,
-                        name: dumbbleData!.name,
-                        price: dumbbleData!.price)));
-              },
-              child: SingleProductWidget(
-                  name: dumbbleData!.name,
-                  price: dumbbleData!.price,
-                  image: dumbbleData!.image),
-            ),
-          ],
-        ),
+          );
+        }).toList()),
       ],
     );
   }
@@ -449,49 +462,58 @@ class _HomePageViewState extends State<HomePageView> {
           ),
         ),
         Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (ctx) => DetailsView(
-                                  image: barcaData!.image,
-                                  name: barcaData!.name,
-                                  price: barcaData!.price,
-                                )));
-                      },
-                      child: SingleProductWidget(
-                          name: barcaData!.name,
-                          price: barcaData!.price,
-                          image: barcaData!.image),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (ctx) => DetailsView(
-                                  image: psgData!.image,
-                                  name: psgData!.name,
-                                  price: psgData!.price,
-                                )));
-                      },
-                      child: SingleProductWidget(
-                        name: psgData!.name,
-                        price: psgData!.price,
-                        image: psgData!.image,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                  children: 
+                  productProvider.getHomeNewList.map((e) {
+                    return Expanded(
+                      child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: Container(
+                            child: GestureDetector(
+                                                onTap: () {
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                builder: (ctx) => DetailsView(
+                                      image: e.image,
+                                      name: e.name,
+                                      price: e.price,
+                                    )));
+                                                },
+                                                child: SingleProductWidget(
+                              name: e.name,
+                              price: e.price,
+                              image: e.image),
+                                              ),
+                          ),
+                        ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    //         builder: (ctx) => DetailsView(
+                    //               image:e.image,
+                    //               name: e.name,
+                    //               price: e.price,
+                    //             )));
+                    //   },
+                    //   child: SingleProductWidget(
+                    //     name: e.name,
+                    //     price: e.price,
+                    //     image: e.image,
+                    //   ),
+                    // ),
+
+                      ],
+                      )
+                    );
+                  }).toList(),
+                    
+                  
+                
+              
             ),
           ],
-        ),
-      ],
-    );
+        );
+      
+    
   }
 
   @override
@@ -505,6 +527,8 @@ class _HomePageViewState extends State<HomePageView> {
     productProvider = Provider.of<ProductProvider>(context);
     productProvider.getFeaturedData();
     productProvider.getNewData();
+    productProvider.getHomeFeaturedData();
+    productProvider.getHomeNewData();
 
     return Scaffold(
       key: _key,
