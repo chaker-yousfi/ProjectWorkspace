@@ -21,32 +21,27 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          // primaryColor: Color(0xff746bc9),
-          // scaffoldBackgroundColor: Colors.white,
-          // visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
-      debugShowCheckedModeBanner: false,
-      home: MultiProvider(
-        providers: [
-          ListenableProvider<ProductProvider>(
-            create: (ctx) => ProductProvider(),
-          ),
-          ListenableProvider<CategoryProvider>(
-            create: (ctx) => CategoryProvider(),
-          ),
-        ],
-        child: StreamBuilder(
+ Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ListenableProvider<ProductProvider>(
+          create: (context) => ProductProvider(),
+        ),
+        ListenableProvider<CategoryProvider>(
+          create: (context) => CategoryProvider(),
+        ),
+        // Add other providers here if needed
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (ctx, snapShot) {
-            if (snapShot.hasData) {
+            //if (snapShot.hasData) {
               return HomePageView();
-            } else {
-              return LoginView();
-            }
+            // } else {
+            //   return LoginView();
+            //}
           },
         ),
       ),

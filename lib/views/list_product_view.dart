@@ -1,8 +1,9 @@
 import 'package:ecommerce_app/model/product.dart';
+import 'package:ecommerce_app/views/details_view.dart';
 import 'package:ecommerce_app/widgets/single_product_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:provider/provider.dart';
 class ListProductView extends StatelessWidget {
   final String name;
   final List<Product> snapShot;
@@ -71,12 +72,22 @@ class ListProductView extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     children: snapShot
                         .map(
-                          (e) => SingleProductWidget(
+                           (e) => GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (ctx) => DetailsView(
                             image: e.image,
-                            price: e.price,
                             name: e.name,
-                          ),
-                        )
+                            price: e.price,
+                          )));
+                },
+                child: SingleProductWidget(
+                  price: e.price,
+                  image: e.image,
+                  name: e.name,
+                ),
+              ),
+            )
                         .toList(),
                   ),
                 )

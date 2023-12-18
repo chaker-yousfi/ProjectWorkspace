@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import '/views/list_product_view.dart';
 import '/widgets/single_product_widget.dart';
 import '../model/product.dart';
+import '../widgets/notificationbadge.dart';
 
 class HomePageView extends StatefulWidget {
   static const String pageRoute = "/homepageview";
@@ -390,7 +391,7 @@ class _HomePageViewState extends State<HomePageView> {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (contetx) => ListProductView(
+                    builder: (context) => ListProductView(
                       name: "Featured Products",
                       snapShot: featured,
                     ),
@@ -420,8 +421,8 @@ class _HomePageViewState extends State<HomePageView> {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (ctx) => DetailsView(
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DetailsView(
                                   image: e.image,
                                   name: e.name,
                                   price: e.price,
@@ -481,7 +482,7 @@ class _HomePageViewState extends State<HomePageView> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushReplacement(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => ListProductView(
                             name: "New Products",
@@ -513,7 +514,7 @@ class _HomePageViewState extends State<HomePageView> {
                   child: Container(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) => DetailsView(
                                   image: e.image,
                                   name: e.name,
@@ -591,13 +592,7 @@ class _HomePageViewState extends State<HomePageView> {
             ),
             onPressed: () {},
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.notifications_none,
-              color: Colors.black,
-            ),
-          ),
+          NotificationsButton()
         ],
       ),
       body: Container(

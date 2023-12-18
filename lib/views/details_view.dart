@@ -1,10 +1,14 @@
 import 'package:ecommerce_app/commons/colors.dart';
 import 'package:ecommerce_app/commons/images.dart';
+import 'package:ecommerce_app/model/product.dart';
 import 'package:ecommerce_app/views/cart_view.dart';
 import 'package:ecommerce_app/views/homepage_view.dart';
 import 'package:ecommerce_app/widgets/mybutton_widget.dart';
+import 'package:ecommerce_app/widgets/notificationbadge.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../provider/product_provider.dart';
+import 'package:provider/provider.dart';
 
 class DetailsView extends StatefulWidget {
   final String name;
@@ -16,7 +20,9 @@ class DetailsView extends StatefulWidget {
 }
 
 class _DetailsViewState extends State<DetailsView> {
-  int count = 1;
+  int count=1;
+  late ProductProvider productProvider;
+
   Widget _buildSizeProduct({required String name}) {
     return Container(
       height: 60,
@@ -255,6 +261,7 @@ class _DetailsViewState extends State<DetailsView> {
 
   @override
   Widget build(BuildContext context) {
+    productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -279,13 +286,7 @@ class _DetailsViewState extends State<DetailsView> {
           },
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          )
+          NotificationsButton(),
         ],
       ),
       body: Container(
@@ -311,15 +312,18 @@ class _DetailsViewState extends State<DetailsView> {
                   MyButton(
                     name: "Checkout",
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
+                       
+                      productProvider.getCardData(
+                          name: widget.name,
+                          image: widget.image,
+                          quantity: count,
+                          price: widget.price);
+                          Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (ctx) => CartView(
-                            image: widget.image,
-                            name: widget.name,
-                            price: widget.price,
-                          ),
+                          builder: (ctx) => CartView(),
                         ),
                       );
+                     
                     },
                   ),
                 ],

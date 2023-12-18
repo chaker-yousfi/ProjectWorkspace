@@ -1,95 +1,19 @@
+import 'package:ecommerce_app/provider/product_provider.dart';
 import 'package:ecommerce_app/views/cart_view.dart';
+import 'package:ecommerce_app/widgets/cardsingleproduct.dart';
+import 'package:ecommerce_app/widgets/notificationbadge.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ecommerce_app/commons/images.dart';
+import 'package:provider/provider.dart';
 
 class CheckOut extends StatefulWidget {
-  final double price;
-  final String name;
-  final String image;
-  CheckOut({this.image = "", this.name = "", this.price = 0});
   @override
   State<CheckOut> createState() => _CheckOutState();
 }
 
 class _CheckOutState extends State<CheckOut> {
-  Widget _buildSingleCartProduct() {
-    return Container(
-      height: 150,
-      width: double.infinity,
-      child: Card(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: [
-              Container(
-                height: 130,
-                width: 150,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        fit: BoxFit.fill, image: AssetImage(widget.image))),
-              ),
-              Container(
-                height: 140,
-                width: 200,
-                child: ListTile(
-                  title: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.name,
-                        style: GoogleFonts.plusJakartaSans(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Text(
-                        "Cloths",
-                        style: GoogleFonts.plusJakartaSans(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        "${widget.price} DZD",
-                        style: GoogleFonts.plusJakartaSans(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Container(
-                        height: 35,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(10)),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Text(
-                                "Quantity",
-                                style: GoogleFonts.plusJakartaSans(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Text("1"),
-                            ]),
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            ],
-          ),
-        ],
-      )),
-    );
-  }
+  late ProductProvider productProvider;
 
   Widget _buildBottomDetail(
       {required String startName, required String endName}) {
@@ -116,6 +40,7 @@ class _CheckOutState extends State<CheckOut> {
 
   @override
   Widget build(BuildContext context) {
+    productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -135,24 +60,18 @@ class _CheckOutState extends State<CheckOut> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (ctx) => CartView(
-                    image: widget.image,
-                    name: widget.name,
-                    price: widget.price),
-              ),
-            );
+            // Navigator.of(context).pushReplacement(
+               // MaterialPageRoute(
+               //   builder: (ctx) => CartView(
+              //       image: widget.image,
+              //       name: widget.name,
+               //       price: widget.price),
+               // ),
+            // );
           },
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.notifications_none,
-              color: Colors.black,
-            ),
-            onPressed: () {},
-          )
+         NotificationsButton(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -178,25 +97,28 @@ class _CheckOutState extends State<CheckOut> {
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        child: ListView(
-          children: <Widget>[
-            Column(
+        child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    _buildSingleCartProduct(),
-                    _buildSingleCartProduct(),
-                    _buildSingleCartProduct(),
-                    _buildSingleCartProduct(),
-                  ],
+                Expanded(
+                  child: Container(
+                    child: ListView.builder(
+                            itemCount: productProvider.getCardModelListLength,
+                            itemBuilder: (ctx, index) {
+                    return CardSingleProduct(
+                              name: productProvider.getCardModelList[index].name,
+                              image: productProvider.getCardModelList[index].image,
+                              quantity:productProvider.getCardModelList[index].quantity,
+                              price: productProvider.getCardModelList[index].price);
+                            }),
+                  ),
                 ),
                 Container(
                   height: 150,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      
                       _buildBottomDetail(
                         startName: "Your Price",
                         endName: "20000 DZD",
@@ -218,8 +140,8 @@ class _CheckOutState extends State<CheckOut> {
                 )
               ],
             ),
-          ],
-        ),
+             
+       
       ),
     );
   }

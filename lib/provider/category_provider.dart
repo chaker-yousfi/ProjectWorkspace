@@ -140,7 +140,7 @@ class CategoryProvider with ChangeNotifier {
     shirtSnapShot.docs.forEach(
       (element) {
         shirtData = Product(
-            element["image"], element["name"], element["price"].toDouble());
+            image:element["image"], name:element["name"], price:element["price"].toDouble() );
         newList.add(shirtData);
       },
     );
@@ -162,7 +162,7 @@ class CategoryProvider with ChangeNotifier {
     shoesSnapShot.docs.forEach(
       (element) {
         shoesData = Product(
-            element["image"], element["name"], element["price"].toDouble());
+            image:element["image"], name  :element["name"], price:element["price"].toDouble());
         newList.add(shoesData);
       },
     );
@@ -184,7 +184,7 @@ class CategoryProvider with ChangeNotifier {
     shortsSnapShot.docs.forEach(
       (element) {
         shortsData = Product(
-            element["image"], element["name"], element["price"].toDouble());
+            image:element["image"], name:element["name"], price:element["price"].toDouble());
         newList.add(shortsData);
       },
     );
@@ -206,7 +206,7 @@ class CategoryProvider with ChangeNotifier {
     tracksuitSnapShot.docs.forEach(
       (element) {
         trascksuitData = Product(
-            element["image"], element["name"], element["price"].toDouble());
+            image:element["image"], name:element["name"], price:element["price"].toDouble());
         newList.add(trascksuitData);
       },
     );
@@ -228,7 +228,7 @@ class CategoryProvider with ChangeNotifier {
     glovesSnapShot.docs.forEach(
       (element) {
         glovesData = Product(
-            element["image"], element["name"], element["price"].toDouble());
+            image:element["image"], name:element["name"], price:element["price"].toDouble());
         newList.add(glovesData);
       },
     );
