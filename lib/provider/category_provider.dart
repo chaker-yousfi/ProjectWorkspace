@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ecommerce_app/model/categoryicon.dart';
 import 'package:ecommerce_app/model/product.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,122 @@ class CategoryProvider with ChangeNotifier {
   late Product trascksuitData;
   List<Product> gloves = [];
   late Product glovesData;
+  List<CategoryIcon> shirtIcon = [];
+  late CategoryIcon shirtIconData;
+  List<CategoryIcon> shoesIcon = [];
+  late CategoryIcon shoesIconData;
+  List<CategoryIcon> shortsIcon = [];
+  late CategoryIcon shortsIconData;
+  List<CategoryIcon> tracksuitIcon = [];
+  late CategoryIcon tracksuitIconData;
+  List<CategoryIcon> glovesIcon = [];
+  late CategoryIcon glovesIconData;
+
+  Future<void> getShirtIconData() async {
+    List<CategoryIcon> newList = [];
+    QuerySnapshot shirtIconSnapShot = await FirebaseFirestore.instance
+        .collection("categoryicon")
+        .doc("GhKATQuB0ozBMgaiwTfM")
+        .collection("shirts")
+        .get();
+    shirtIconSnapShot.docs.forEach(
+      (element) {
+        shirtIconData = CategoryIcon(element["image"]);
+        newList.add(shirtIconData);
+      },
+    );
+    shirtIcon = newList;
+    notifyListeners();
+  }
+
+  List<CategoryIcon> get getShirtIconList {
+    return shirtIcon;
+  }
+
+  Future<void> getShoesIconData() async {
+    List<CategoryIcon> newList = [];
+    QuerySnapshot shoesIconSnapShot = await FirebaseFirestore.instance
+        .collection("categoryicon")
+        .doc("GhKATQuB0ozBMgaiwTfM")
+        .collection("shoes")
+        .get();
+    shoesIconSnapShot.docs.forEach(
+      (element) {
+        shoesIconData = CategoryIcon(element["image"]);
+        newList.add(shoesIconData);
+      },
+    );
+    shoesIcon = newList;
+    notifyListeners();
+  }
+
+  List<CategoryIcon> get getShoesIconList {
+    return shoesIcon;
+  }
+
+  Future<void> getShortsIconData() async {
+    List<CategoryIcon> newList = [];
+    QuerySnapshot shortsIconSnapShot = await FirebaseFirestore.instance
+        .collection("categoryicon")
+        .doc("GhKATQuB0ozBMgaiwTfM")
+        .collection("shorts")
+        .get();
+    shortsIconSnapShot.docs.forEach(
+      (element) {
+        shortsIconData = CategoryIcon(element["image"]);
+        newList.add(shortsIconData);
+      },
+    );
+    shortsIcon = newList;
+    notifyListeners();
+  }
+
+  List<CategoryIcon> get getShortsIconList {
+    return shortsIcon;
+  }
+
+  Future<void> getTracksuitIconData() async {
+    List<CategoryIcon> newList = [];
+    QuerySnapshot tracksuitIconSnapShot = await FirebaseFirestore.instance
+        .collection("categoryicon")
+        .doc("GhKATQuB0ozBMgaiwTfM")
+        .collection("tracksuit")
+        .get();
+    tracksuitIconSnapShot.docs.forEach(
+      (element) {
+        tracksuitIconData = CategoryIcon(element["image"]);
+        newList.add(tracksuitIconData);
+      },
+    );
+    tracksuitIcon = newList;
+    notifyListeners();
+  }
+
+  List<CategoryIcon> get getTracksuitIconList {
+    return tracksuitIcon;
+  }
+
+  Future<void> getGlovesIconData() async {
+    List<CategoryIcon> newList = [];
+    QuerySnapshot glovesIconSnapShot = await FirebaseFirestore.instance
+        .collection("categoryicon")
+        .doc("GhKATQuB0ozBMgaiwTfM")
+        .collection("gloves")
+        .get();
+    glovesIconSnapShot.docs.forEach(
+      (element) {
+        glovesIconData = CategoryIcon(element["image"]);
+        newList.add(glovesIconData);
+      },
+    );
+    glovesIcon = newList;
+    notifyListeners();
+  }
+
+  List<CategoryIcon> get getGlovesIconList {
+    return glovesIcon;
+  }
+
   Future<void> getShirtData() async {
     List<Product> newList = [];
     QuerySnapshot shirtSnapShot = await FirebaseFirestore.instance

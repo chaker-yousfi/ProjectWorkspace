@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/commons/images.dart';
+import 'package:ecommerce_app/model/categoryicon.dart';
 import 'package:ecommerce_app/provider/category_provider.dart';
 import 'package:ecommerce_app/provider/product_provider.dart';
 import 'package:ecommerce_app/views/cart_view.dart';
@@ -43,7 +44,7 @@ class _HomePageViewState extends State<HomePageView> {
         height: 40,
         child: Image(
           color: Colors.white,
-          image: AssetImage(image!),
+          image: NetworkImage(image!),
         ),
       ),
       // backgroundImage: AssetImage("images/$image"),
@@ -205,13 +206,127 @@ class _HomePageViewState extends State<HomePageView> {
     );
   }
 
-  Widget _buildCategory() {
+  Widget _buildShirtIcon() {
+    List<CategoryIcon> shirtIcon = categoryProvider.getShirtIconList;
     List<Product> shirt = categoryProvider.getShirtList;
-    List<Product> shoes = categoryProvider.getShoesList;
-    List<Product> shorts = categoryProvider.getShortsList;
-    List<Product> tracksuit = categoryProvider.getTracksuitList;
-    List<Product> gloves = categoryProvider.getGlovesList;
+    return Row(
+        children: shirtIcon.map((e) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => ListProductView(
+                name: "Football Shirts",
+                snapShot: shirt,
+              ),
+            ),
+          );
+        },
+        child: _buildProductCategory(
+          image: e.image,
+          colorCode: 0xff33dcfd,
+        ),
+      );
+    }).toList());
+  }
 
+  Widget _buildShoesIcon() {
+    List<CategoryIcon> shoesIcon = categoryProvider.getShoesIconList;
+    List<Product> shoes = categoryProvider.getShoesList;
+    return Row(
+        children: shoesIcon.map((e) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => ListProductView(
+                name: "Football Shoes",
+                snapShot: shoes,
+              ),
+            ),
+          );
+        },
+        child: _buildProductCategory(
+          image: e.image,
+          colorCode: 0xff33dcfd,
+        ),
+      );
+    }).toList());
+  }
+
+  Widget _buildShortsIcon() {
+    List<CategoryIcon> shortsIcon = categoryProvider.getShortsIconList;
+    List<Product> shorts = categoryProvider.getShortsList;
+    return Row(
+        children: shortsIcon.map((e) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => ListProductView(
+                name: "Football Shorts",
+                snapShot: shorts,
+              ),
+            ),
+          );
+        },
+        child: _buildProductCategory(
+          image: e.image,
+          colorCode: 0xff33dcfd,
+        ),
+      );
+    }).toList());
+  }
+
+  Widget _buildTracksuitIcon() {
+    List<CategoryIcon> tracksuitIcon = categoryProvider.getTracksuitIconList;
+    List<Product> tracksuit = categoryProvider.getTracksuitList;
+    return Row(
+        children: tracksuitIcon.map((e) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => ListProductView(
+                name: "Tracksuits",
+                snapShot: tracksuit,
+              ),
+            ),
+          );
+        },
+        child: _buildProductCategory(
+          image: e.image,
+          colorCode: 0xff33dcfd,
+        ),
+      );
+    }).toList());
+  }
+
+  Widget _buildGlovesIcon() {
+    List<CategoryIcon> glovesIcon = categoryProvider.getGlovesIconList;
+    List<Product> gloves = categoryProvider.getGlovesList;
+    return Row(
+        children: glovesIcon.map((e) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => ListProductView(
+                name: "GK Gloves",
+                snapShot: gloves,
+              ),
+            ),
+          );
+        },
+        child: _buildProductCategory(
+          image: e.image,
+          colorCode: 0xff33dcfd,
+        ),
+      );
+    }).toList());
+  }
+
+  Widget _buildCategory() {
     return Column(
       children: <Widget>[
         Container(
@@ -235,93 +350,21 @@ class _HomePageViewState extends State<HomePageView> {
             ],
           ),
         ),
-        Container(
-          height: 60,
-          child: Row(
-            children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => ListProductView(
-                        name: "Football Shirts",
-                        snapShot: shirt,
-                      ),
-                    ),
-                  );
-                },
-                child: _buildProductCategory(
-                  image: categoryImage_1,
-                  colorCode: 0xff33dcfd,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => ListProductView(
-                        name: "Football Shoes",
-                        snapShot: shoes,
-                      ),
-                    ),
-                  );
-                },
-                child: _buildProductCategory(
-                  image: categoryImage_2,
-                  colorCode: 0xff33dcfd,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => ListProductView(
-                        name: "Football Shorts",
-                        snapShot: shorts,
-                      ),
-                    ),
-                  );
-                },
-                child: _buildProductCategory(
-                  image: categoryImage_3,
-                  colorCode: 0xff33dcfd,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => ListProductView(
-                        name: "Tracksuits",
-                        snapShot: tracksuit,
-                      ),
-                    ),
-                  );
-                },
-                child: _buildProductCategory(
-                  image: categoryImage_4,
-                  colorCode: 0xff33dcfd,
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (ctx) => ListProductView(
-                        name: "GK Gloves",
-                        snapShot: gloves,
-                      ),
-                    ),
-                  );
-                },
-                child: _buildProductCategory(
-                  image: categoryImage_5,
-                  colorCode: 0xff33dcfd,
-                ),
-              ),
-            ],
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Container(
+            height: 60,
+            child: Row(
+              children: <Widget>[
+                _buildShirtIcon(),
+                _buildShoesIcon(),
+                _buildShortsIcon(),
+                _buildTracksuitIcon(),
+                _buildGlovesIcon(),
+              ],
+            ),
           ),
-        ),
+        )
       ],
     );
   }
@@ -462,73 +505,67 @@ class _HomePageViewState extends State<HomePageView> {
           ),
         ),
         Row(
-                  children: 
-                  productProvider.getHomeNewList.map((e) {
-                    return Expanded(
-                      child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Container(
-                            child: GestureDetector(
-                                                onTap: () {
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (ctx) => DetailsView(
-                                      image: e.image,
-                                      name: e.name,
-                                      price: e.price,
-                                    )));
-                                                },
-                                                child: SingleProductWidget(
-                              name: e.name,
-                              price: e.price,
-                              image: e.image),
-                                              ),
-                          ),
-                        ),
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    //         builder: (ctx) => DetailsView(
-                    //               image:e.image,
-                    //               name: e.name,
-                    //               price: e.price,
-                    //             )));
-                    //   },
-                    //   child: SingleProductWidget(
-                    //     name: e.name,
-                    //     price: e.price,
-                    //     image: e.image,
-                    //   ),
-                    // ),
-
-                      ],
-                      )
-                    );
-                  }).toList(),
-                    
-                  
-                
-              
-            ),
-          ],
-        );
-      
-    
+          children: productProvider.getHomeNewList.map((e) {
+            return Expanded(
+                child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (ctx) => DetailsView(
+                                  image: e.image,
+                                  name: e.name,
+                                  price: e.price,
+                                )));
+                      },
+                      child: SingleProductWidget(
+                          name: e.name, price: e.price, image: e.image),
+                    ),
+                  ),
+                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context).pushReplacement(MaterialPageRoute(
+                //         builder: (ctx) => DetailsView(
+                //               image:e.image,
+                //               name: e.name,
+                //               price: e.price,
+                //             )));
+                //   },
+                //   child: SingleProductWidget(
+                //     name: e.name,
+                //     price: e.price,
+                //     image: e.image,
+                //   ),
+                // ),
+              ],
+            ));
+          }).toList(),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     categoryProvider = Provider.of<CategoryProvider>(context);
+    productProvider = Provider.of<ProductProvider>(context);
     categoryProvider.getShirtData();
     categoryProvider.getShoesData();
     categoryProvider.getShortsData();
     categoryProvider.getTracksuitData();
     categoryProvider.getGlovesData();
-    productProvider = Provider.of<ProductProvider>(context);
     productProvider.getFeaturedData();
     productProvider.getNewData();
     productProvider.getHomeFeaturedData();
     productProvider.getHomeNewData();
+    categoryProvider.getShirtIconData();
+    categoryProvider.getShortsIconData();
+    categoryProvider.getShoesIconData();
+    categoryProvider.getTracksuitIconData();
+    categoryProvider.getGlovesIconData();
 
     return Scaffold(
       key: _key,
