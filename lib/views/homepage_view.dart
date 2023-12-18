@@ -357,11 +357,94 @@ class _HomePageViewState extends State<HomePageView> {
             height: 60,
             child: Row(
               children: <Widget>[
+<<<<<<< HEAD
                 _buildShirtIcon(),
                 _buildShoesIcon(),
                 _buildShortsIcon(),
                 _buildTracksuitIcon(),
                 _buildGlovesIcon(),
+=======
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => ListProductView(
+                          name: "Football Shirts",
+                          snapShot: shirt,
+                        ),
+                      ),
+                    );
+                  },
+                  child: _buildProductCategory(
+                    image: categoryImage_1,
+                    colorCode: 0xff33dcfd,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => ListProductView(
+                          name: "Football Shoes",
+                          snapShot: shoes,
+                        ),
+                      ),
+                    );
+                  },
+                  child: _buildProductCategory(
+                    image: categoryImage_2,
+                    colorCode: 0xff33dcfd,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => ListProductView(
+                          name: "Football Shorts",
+                          snapShot: shorts,
+                        ),
+                      ),
+                    );
+                  },
+                  child: _buildProductCategory(
+                    image: categoryImage_3,
+                    colorCode: 0xff33dcfd,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => ListProductView(
+                          name: "Tracksuits",
+                          snapShot: tracksuit,
+                        ),
+                      ),
+                    );
+                  },
+                  child: _buildProductCategory(
+                    image: categoryImage_4,
+                    colorCode: 0xff33dcfd,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => ListProductView(
+                          name: "GK Gloves",
+                          snapShot: gloves,
+                        ),
+                      ),
+                    );
+                  },
+                  child: _buildProductCategory(
+                    image: categoryImage_5,
+                    colorCode: 0xff33dcfd,
+                  ),
+                ),
+>>>>>>> db35395 (commit)
               ],
             ),
           ),
